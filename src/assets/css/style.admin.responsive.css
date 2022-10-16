@@ -1,0 +1,40 @@
+/* 
+    0-320, // 100% - max:425px - xs
+    320-576, // 540px  - sm
+    576-768, // 720px - md
+    768-992, // 960px  - lg
+    992-1200, // 1140px - xl
+    1200-1400, // 1340px - xxl
+    1400-1600, // 1540px - 3xl
+    1600-2560, // 1540px - 4xl
+ */
+
+@media (max-width: 1600px) {
+}
+
+@media (max-width: 1599px) {
+}
+
+@media (max-width: 1399px) {
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+    .sidebar-menu-area {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .menu-button {
+        display: inline-block;
+    }
+}
+
+@media (max-width: 575px) {
+    .menu-button {
+        margin: 0;
+    }
+}

@@ -1,0 +1,33 @@
+.my-drive {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+.my-drive-title {
+  width: 100%;
+  border-bottom: 1px solid #e7e7ec;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+.my-drive-list {
+  width: 19%;
+  margin-right: 1%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 12px 16px;
+  border: 1px solid #e7e7ec;
+  opacity: 0.8;
+  display: flex;
+  align-items: flex-start;
+}
+.my-drive-list:hover {
+  background-color: #f0f0f0;
+}
+.my-drive-list > img {
+  margin-right: 15px;
+  height: 16px;
+}
+.my-drive-list > span {
+  font-size: 14px;
+}
