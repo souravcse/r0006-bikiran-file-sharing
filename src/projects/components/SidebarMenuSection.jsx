@@ -1,9 +1,15 @@
-import { useState } from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useEffect, useRef, useState } from 'react';
+
 import { Link } from 'react-router-dom';
+import FileAdd from '../../assets/images/fileAdd.svg';
+import FolderAdd from '../../assets/images/folderAdd.svg';
+import FolderUp from '../../assets/images/folderUp.svg';
 import MyDriveIcon from '../../assets/images/myDrive.svg';
 import PlusIcon from '../../assets/images/PlusIcon.svg';
 import ShareDriveIcon from '../../assets/images/shareDrive.svg';
 import Trash from '../../assets/images/trash.svg';
+import FolderCreateModal from './modals/FolderCreateModal';
 
 const list = [
     {
@@ -25,6 +31,42 @@ const list = [
         icon: Trash,
     },
 ];
+
+function AddBox({ show, myRef, setShow, setFCreateShow }) {
+    const handlefCreate = () => {
+        setFCreateShow(true);
+        setShow(false);
+    };
+    if (!show) {
+        return null;
+    }
+    return (
+        <>
+            <div ref={myRef} className="add-box-modal">
+                <ul>
+                    <li onClick={handlefCreate}>
+                        <img src={FolderAdd} alt="" />
+                        <span>Folder Create</span>
+                    </li>
+                    <li
+                        style={{
+                            background: '#E6E2EB',
+                            height: 1,
+                            marginTop: 10,
+                            marginBottom: 10,
+                        }}
+                    />
+                    <li>
+                        <img src={FileAdd} alt="" /> <span>File Upload</span>
+                    </li>
+                    <li>
+                        <img src={FolderUp} alt="" /> <span>Folder Upload</span>
+                    </li>
+                </ul>
+            </div>
+        </>
+    );
+}
 
 const OptionSubList = ({ clickOnEndItem, subMenu, openL1, setOpenL1 }) => {
     if (!subMenu.length) {
@@ -55,14 +97,46 @@ const OptionSubList = ({ clickOnEndItem, subMenu, openL1, setOpenL1 }) => {
 const OptionList = ({ removeMenus = [], clickOnEndItem, menuL0, menuL1 }) => {
     const [openL0, setOpenL0] = useState(menuL0);
     const [openL1, setOpenL1] = useState(menuL1);
+    const [addBoxShow, setAddBoxShow] = useState(false);
+    const [fCreateShow, setFCreateShow] = useState(false);
 
+    const ref = useRef();
+    const handleClickOutside = (ev) => {
+        if (!(ref && ref.current?.contains(ev.target))) {
+            // alert('You clicked outside of me!');
+            setAddBoxShow(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousedown', handleClickOutside);
+    }, []);
     return (
         <div className="option-list">
             <ul>
                 <li className="add-new-li">
-                    <button type="button" className="add-new-btn">
-                        <img className="icon" src={PlusIcon} alt="Plus" /> Add New
+                    <button
+                        type="button"
+                        className="add-new-btn"
+                        onClick={() => setAddBoxShow(true)}
+                    >
+                        <img
+                            className="icon"
+                            src={PlusIcon}
+                            alt="Plus"
+                            style={{ width: 15, marginRight: 10 }}
+                        />{' '}
+                        Add New
                     </button>
+                    <br />
+
+                    <AddBox
+                        show={addBoxShow}
+                        setShow={setAddBoxShow}
+                        myRef={ref}
+                        setFCreateShow={setFCreateShow}
+                    />
+                    <FolderCreateModal show={fCreateShow} setFCreateShow={setFCreateShow} />
                 </li>
                 {list
                     .filter((item) => removeMenus.indexOf(item.id) === -1)

@@ -4,50 +4,52 @@ import MyDriveTitle from '../../../components/MyDriveTitle';
 
 function UsersDrivePage() {
     return (
-        <div className="my-drive">
+        <>
             <MyDriveTitle />
-            <div className="my-drive-sub-title">Folder</div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
+            <div className="my-drive">
+                <div className="my-drive-sub-title">Folder</div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
+                <div className="my-drive-list">
+                    <img src={folderImg} alt="Floder Img" />
+                    <span>Personal</span>
+                </div>
             </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-            <div className="my-drive-list">
-                <img src={folderImg} alt="Floder Img" />
-                <span>Personal</span>
-            </div>
-        </div>
+        </>
     );
 }
 

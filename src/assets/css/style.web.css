@@ -7,16 +7,18 @@
 .my-drive-title {
   width: 100%;
   border-bottom: 1px solid #e7e7ec;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  padding: 10px;
   display: flex;
+  align-items: center;
 }
 .my-drive-title > h4 {
   font-size: 20px;
+  margin-bottom: 0;
 }
 .my-drive-title-option {
   width: 94%;
   display: flex;
+  justify-content: right;
 }
 .my-drive-title-option button {
   border: unset;
@@ -54,4 +56,72 @@
 }
 .my-drive-list > span {
   font-size: 14px;
+}
+.add-new-li {
+  position: relative;
+}
+.add-box-modal {
+  background-color: #fff;
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 97%;
+  padding: 15px 0;
+  z-index: 99;
+  border-radius: 5px;
+  box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%),
+    0px 3px 14px 2px rgb(0 0 0 / 12%), 0px 5px 5px -3px rgb(0 0 0 / 20%);
+}
+.add-box-modal ul {
+  padding-left: 0;
+}
+.add-box-modal ul li {
+  list-style: none;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  line-height: 30px;
+  cursor: pointer;
+  padding-left: 15px;
+}
+.add-box-modal ul li:hover {
+  background-color: lightgray;
+}
+.add-box-modal ul li > img {
+  margin-right: 20px;
+  min-width: 15px;
+  object-fit: contain;
+}
+.folder-create-input {
+  width: 100%;
+  margin-bottom: 20px;
+  height: 40px;
+}
+.folder-create-input > input {
+  width: 100%;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  height: 100%;
+  padding-left: 10px;
+  font-size: 12px;
+}
+.folder-create-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.folder-create-button > button {
+  background-color: unset;
+  border: unset;
+  padding: 5px 5px;
+  font-size: 15px;
+}
+.folder-create-button > button:hover {
+  background-color: #ce89d32a;
+}
+.folder-create-button > button:first-child {
+  color: red;
+}
+.folder-create-button > button:last-child {
+  color: blue;
 }
