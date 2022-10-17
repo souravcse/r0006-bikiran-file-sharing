@@ -31,7 +31,7 @@ const ConfigApi = {
 
     // Products
     // :type/, :type/:contractId/execute/, :type/:contractId/cp-login/
-    API_HOSTING_LIST: `${api}/bikiran/services/hosting/`
+    API_HOSTING_LIST: `${api}/bikiran/services/hosting/`,
 };
 
 export default ConfigApi;

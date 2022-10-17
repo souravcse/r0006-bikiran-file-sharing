@@ -1,24 +1,28 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import MyDriveIcon from '../../assets/images/myDrive.svg';
+import PlusIcon from '../../assets/images/PlusIcon.svg';
+import ShareDriveIcon from '../../assets/images/shareDrive.svg';
+import Trash from '../../assets/images/trash.svg';
 
 const list = [
     {
-        id: 'domain',
+        id: 'myDrive',
         title: 'My Drive',
         path: '/user/drive/',
-        icon: '',
+        icon: MyDriveIcon,
     },
     {
-        id: 'hosting',
+        id: 'shareDrive',
         title: 'Shared Drive',
         path: '/user/share/drive/',
-        icon: '',
+        icon: ShareDriveIcon,
     },
     {
-        id: 'sms-package',
+        id: 'trash',
         title: 'Trash',
         path: '/user/trash/',
-        icon: '',
+        icon: Trash,
     },
 ];
 
@@ -57,7 +61,7 @@ const OptionList = ({ removeMenus = [], clickOnEndItem, menuL0, menuL1 }) => {
             <ul>
                 <li className="add-new-li">
                     <button type="button" className="add-new-btn">
-                        <img className="icon" src="" alt="Plus" /> Add New
+                        <img className="icon" src={PlusIcon} alt="Plus" /> Add New
                     </button>
                 </li>
                 {list

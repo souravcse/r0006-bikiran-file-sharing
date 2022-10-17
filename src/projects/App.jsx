@@ -6,6 +6,8 @@ import '../assets/css/style.admin.css';
 import '../assets/css/style.admin.responsive.css';
 import '../assets/css/style.header.css';
 import '../assets/css/style.header.responsive.css';
+import '../assets/css/style.search-bar.css';
+import '../assets/css/style.search-bar.responsive.css';
 import '../assets/css/style.system.responsive.css';
 import '../assets/css/style.web.css';
 import RouteHandler from './RouteHandler';

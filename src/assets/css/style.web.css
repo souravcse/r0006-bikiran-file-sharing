@@ -7,8 +7,32 @@
 .my-drive-title {
   width: 100%;
   border-bottom: 1px solid #e7e7ec;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  display: flex;
+}
+.my-drive-title > h4 {
+  font-size: 20px;
+}
+.my-drive-title-option {
+  width: 94%;
+  display: flex;
+}
+.my-drive-title-option button {
+  border: unset;
+  background-color: unset;
+  width: 40px;
+  height: 40px;
+}
+.my-drive-title-option button:hover {
+  border: unset;
+  background-color: lightgray;
+  border-radius: 50%;
+}
+.my-drive-sub-title {
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 14px;
 }
 .my-drive-list {
   width: 19%;
