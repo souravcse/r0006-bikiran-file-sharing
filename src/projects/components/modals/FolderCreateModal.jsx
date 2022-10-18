@@ -2,9 +2,9 @@
 /* eslint-disable no-await-in-loop */
 import React, { useState } from 'react';
 
-import axios from 'axios';
 import { Modal } from 'react-bootstrap';
 import ConfigApi from '../../../configs/ConfigApi';
+import AxiosAuth from '../../utils/AxiosAuth';
 
 function FolderCreateModal({ show, setFCreateShow }) {
     const [folderName, setFolderName] = useState('Untitled folder');
@@ -13,20 +13,15 @@ function FolderCreateModal({ show, setFCreateShow }) {
     };
 
     const handleCreateFolder = () => {
-        axios
-            .post(ConfigApi.CREATE_FOLDER, {
-                folderName,
-                parentSl: 0,
-            })
+        AxiosAuth.currentUserAuth('kk')
+            .post(`${ConfigApi.CREATE_FOLDER}`, { folderName })
             .then((response) => {
                 if (response.data.error === 0) {
                     setFCreateShow(false);
                 }
-            })
-            .catch((err) => {
-                console.log(err);
             });
     };
+
     return (
         <Modal size="sm" show={show} onHide={() => setFCreateShow(false)} centered>
             <Modal.Body>

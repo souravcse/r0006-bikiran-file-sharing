@@ -1,8 +1,11 @@
 import React from 'react';
 import folderImg from '../../../../assets/images/folder-icon.svg';
 import MyDriveTitle from '../../../components/MyDriveTitle';
+import InitInfo from '../../../utils/InitInfo';
 
 function UsersDrivePage() {
+    const { logInId } = InitInfo();
+    console.log(logInId);
     return (
         <>
             <MyDriveTitle />
