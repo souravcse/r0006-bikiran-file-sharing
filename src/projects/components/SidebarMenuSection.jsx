@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { createRef, useEffect, useRef, useState } from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import FileAdd from '../../assets/images/fileAdd.svg';
 import FolderAdd from '../../assets/images/folderAdd.svg';
 import FolderUp from '../../assets/images/folderUp.svg';
@@ -12,6 +11,8 @@ import MyDriveIcon from '../../assets/images/myDrive.svg';
 import PlusIcon from '../../assets/images/PlusIcon.svg';
 import ShareDriveIcon from '../../assets/images/shareDrive.svg';
 import Trash from '../../assets/images/trash.svg';
+import ConfigApi from '../../configs/ConfigApi';
+import AxiosAuth from '../utils/AxiosAuth';
 import FolderCreateModal from './modals/FolderCreateModal';
 
 const list = [
@@ -45,6 +46,8 @@ function AddBox({
     setUploadTitle,
 }) {
     const uploadRef = createRef();
+    const params = useParams();
+    const parentSl = params?.folderSl ? params?.folderSl : 1;
 
     const handlefCreate = () => {
         setFCreateShow(true);
@@ -54,23 +57,26 @@ function AddBox({
         setUploadBox(true);
         setShow(false);
         const { files } = target;
+        for (let xx = 0; xx < files.length; xx += 1) {
+            setUploadTitle((oldItems) => [...oldItems, files[xx]?.name]);
+        }
         for (let x = 0; x < files.length; x += 1) {
-            setUploadTitle([files[x]?.name]);
-            // const formData = new FormData();
-            // formData.append('upload_file', files[x]);
-            // await AxiosAuth.post(ConfigApi.FILE_UPLOAD, formData, {
-            //     headers: {
-            //         'Content-Type': 'multipart/form-data',
-            //     },
-            // })
-            //     .then((response) => {
-            //         if (response.data.error === 0) {
-            //             setUploadComplete(true);
-            //         }
-            //     })
-            //     .catch((err) => {
-            //         console.log(err);
-            //     });
+            const formData = new FormData();
+            formData.append('upload_file', files[x]);
+            await AxiosAuth.post(ConfigApi.FILE_UPLOAD.replace(':folderSl', parentSl), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                parentSl,
+            })
+                .then((response) => {
+                    if (response.data.error === 0) {
+                        setUploadComplete((oldItemsx) => [...oldItemsx, files[x]?.name]);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
     };
     if (!show) {

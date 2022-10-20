@@ -12,7 +12,6 @@ function UploadingBox({ uploadBox, setUploadBox, uploadComplete, uploadTitle }) 
     if (!uploadBox) {
         return null;
     }
-    console.log(uploadTitle);
     return (
         <>
             <div className="upload-box-modal">
@@ -26,30 +25,35 @@ function UploadingBox({ uploadBox, setUploadBox, uploadComplete, uploadTitle }) 
                             display: 'flex',
                         }}
                     >
-                        <span style={{ width: 'calc(100% - 14px)' }}>1 upload complete</span>
+                        <span style={{ width: 'calc(100% - 14px)' }}>
+                            {uploadComplete.length > 0
+                                ? `${uploadComplete?.length} file upload complete`
+                                : `${uploadTitle?.length} file uploading`}
+                        </span>
                         <img onClick={() => setUploadBox(false)} src={CrossIcon} alt="Cross" />
                     </li>
-
-                    <li
-                        style={{
-                            paddingTop: 10,
-                            color: 'black',
-                            display: 'flex',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <span style={{ width: 'calc(100% - 30px)' }}>{uploadTitle}</span>
-                        {uploadComplete ? (
-                            <img style={{ width: 20 }} src={CompIcon} alt="Complete" />
-                        ) : (
-                            <div className="lds-ring">
-                                <div />
-                                <div />
-                                <div />
-                                <div />
-                            </div>
-                        )}
-                    </li>
+                    {uploadTitle?.map((rr) => (
+                        <li
+                            style={{
+                                paddingTop: 10,
+                                color: 'black',
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <span style={{ width: 'calc(100% - 30px)' }}>{rr}</span>
+                            {uploadComplete.filter((obj) => obj === rr)[0] ? (
+                                <img style={{ width: 20 }} src={CompIcon} alt="Complete" />
+                            ) : (
+                                <div className="lds-ring">
+                                    <div />
+                                    <div />
+                                    <div />
+                                    <div />
+                                </div>
+                            )}
+                        </li>
+                    ))}
                 </ul>
             </div>
         </>
@@ -57,8 +61,9 @@ function UploadingBox({ uploadBox, setUploadBox, uploadComplete, uploadTitle }) 
 }
 function UserAuthHandler() {
     const [uploadBox, setUploadBox] = useState(false);
-    const [uploadComplete, setUploadComplete] = useState(false);
+    const [uploadComplete, setUploadComplete] = useState([]);
     const [uploadTitle, setUploadTitle] = useState([]);
+
     return (
         <div className={['h-100 user-h-area', 'browser browser-4xl'].join(' ')}>
             <FixedHeaderControl>
