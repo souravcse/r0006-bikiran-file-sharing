@@ -6,6 +6,8 @@ const ConfigApi = {
     LOGIN: `${api}/login`,
     // Folder Create
     CREATE_FOLDER: `${api}/manage/file/folder/create`,
+    GET_FILE: `${api}/manage/file`,
+    GET_FILE_DETAIL: `${api}/manage/file/:folderSl/folder`,
 
     // Search
     API_DOMAIN_DATA: `${api}/search/result/`,

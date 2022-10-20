@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Outlet } from 'react-router-dom';
 import FixedHeaderControl from '../../../components/FixedHeaderControl';
 import HeaderSection from '../../../components/HeaderSection';
@@ -14,7 +15,7 @@ function UserAuthHandler() {
                 <div className="container h-100">
                     <div className="line line-no-wrap h-100">
                         <div className="cell cell-profile h-100 sidebar-menu-area">
-                            <SidebarMenuSection currentUser="" />
+                            <SidebarMenuSection />
                         </div>
                         <div className="cell cell-content h-100">
                             <div className="content-section">

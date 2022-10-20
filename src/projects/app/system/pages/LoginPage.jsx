@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../../../assets/images/Logo.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
 import AxiosAuth from '../../../utils/AxiosAuth';
 
-function authSet(payload) {
-    return {
-        type: 'AUTH_SET',
-        payload,
-    };
-}
-
 function LoginPage() {
-    const dispatch = useDispatch();
     const [userName, setUserName] = useState('');
     const [password, setpassword] = useState('');
     const navigate = useNavigate();
@@ -24,15 +15,19 @@ function LoginPage() {
         setpassword(e.target.value);
     };
     const handleLogin = () => {
-        AxiosAuth.currentUserAuth('kk')
-            .post(`${ConfigApi.LOGIN}`, { email: userName, password })
+        AxiosAuth.post(ConfigApi.LOGIN, { email: userName, password })
             .then((response) => {
+                console.log(response);
+                // --Adding Secure Token
+                if (response.headers['secure-access']) {
+                    localStorage.setItem('Secure-Access', response.headers['secure-access']);
+                }
                 if (response.data.error === 0) {
-                    dispatch(authSet(response.data.id));
-                    localStorage.setItem('log-id', response.data.id);
-
                     navigate('/user/drive/');
                 }
+            })
+            .catch((err) => {
+                console.log(err);
             });
     };
     return (

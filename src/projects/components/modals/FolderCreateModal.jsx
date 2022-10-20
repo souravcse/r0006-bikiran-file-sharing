@@ -3,23 +3,26 @@
 import React, { useState } from 'react';
 
 import { Modal } from 'react-bootstrap';
+import { useParams } from 'react-router-dom';
 import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 
 function FolderCreateModal({ show, setFCreateShow }) {
+    const params = useParams();
+    const parentSl = params?.folderSl ? params?.folderSl : 0;
+
     const [folderName, setFolderName] = useState('Untitled folder');
     const handleFolder = (e) => {
         setFolderName(e.target.value);
     };
 
     const handleCreateFolder = () => {
-        AxiosAuth.currentUserAuth('kk')
-            .post(`${ConfigApi.CREATE_FOLDER}`, { folderName })
-            .then((response) => {
-                if (response.data.error === 0) {
-                    setFCreateShow(false);
-                }
-            });
+        AxiosAuth.post(`${ConfigApi.CREATE_FOLDER}`, { folderName, parentSl }).then((response) => {
+            if (response.data.error === 0) {
+                setFCreateShow(false);
+                window.location.reload();
+            }
+        });
     };
 
     return (

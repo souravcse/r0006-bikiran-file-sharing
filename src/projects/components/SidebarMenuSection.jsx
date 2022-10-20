@@ -1,5 +1,7 @@
+/* eslint-disable no-loop-func */
+/* eslint-disable no-await-in-loop */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import { useEffect, useRef, useState } from 'react';
+import { createRef, useEffect, useRef, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import FileAdd from '../../assets/images/fileAdd.svg';
@@ -9,6 +11,8 @@ import MyDriveIcon from '../../assets/images/myDrive.svg';
 import PlusIcon from '../../assets/images/PlusIcon.svg';
 import ShareDriveIcon from '../../assets/images/shareDrive.svg';
 import Trash from '../../assets/images/trash.svg';
+import ConfigApi from '../../configs/ConfigApi';
+import AxiosAuth from '../utils/AxiosAuth';
 import FolderCreateModal from './modals/FolderCreateModal';
 
 const list = [
@@ -33,9 +37,29 @@ const list = [
 ];
 
 function AddBox({ show, myRef, setShow, setFCreateShow }) {
+    const uploadRef = createRef();
+
     const handlefCreate = () => {
         setFCreateShow(true);
         setShow(false);
+    };
+    const handleOnFileChange = async ({ target }) => {
+        const { files } = target;
+        for (let x = 0; x < files.length; x += 1) {
+            const formData = new FormData();
+            formData.append('image', files[x]);
+            await AxiosAuth.post(ConfigApi.API_FILE_UPLOAD, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+                .then((response) => {
+                    console.log(response);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
     if (!show) {
         return null;
@@ -56,12 +80,25 @@ function AddBox({ show, myRef, setShow, setFCreateShow }) {
                             marginBottom: 10,
                         }}
                     />
-                    <li>
+                    <li
+                        onClick={() => {
+                            uploadRef.current.click();
+                        }}
+                    >
                         <img src={FileAdd} alt="" /> <span>File Upload</span>
                     </li>
                     <li>
                         <img src={FolderUp} alt="" /> <span>Folder Upload</span>
                     </li>
+                    <input
+                        ref={uploadRef}
+                        type="file"
+                        name="file"
+                        onChange={handleOnFileChange}
+                        multiple
+                        style={{ display: 'none' }}
+                        accept="image/png, image/jpeg"
+                    />
                 </ul>
             </div>
         </>
