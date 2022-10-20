@@ -28,6 +28,13 @@ function UsersDrivePage() {
                         <span>{folAr?.title}</span>
                     </Link>
                 ))}
+                <div className="my-drive-sub-title">Files</div>
+                {files?.file?.map((fileAr) => (
+                    <div className="my-drive-list-file" key={fileAr?.sl}>
+                        <img src={folderImg} alt="Floder Img" />
+                        <span>{fileAr?.title}</span>
+                    </div>
+                ))}
             </div>
         </>
     );

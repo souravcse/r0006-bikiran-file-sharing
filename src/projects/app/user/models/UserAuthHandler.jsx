@@ -1,11 +1,64 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import React, { useState } from 'react';
 
 import { Outlet } from 'react-router-dom';
+import CrossIcon from '../../../../assets/images/cross-white.svg';
+import CompIcon from '../../../../assets/images/icon-tic.svg';
 import FixedHeaderControl from '../../../components/FixedHeaderControl';
 import HeaderSection from '../../../components/HeaderSection';
 import SidebarMenuSection from '../../../components/SidebarMenuSection';
 
+function UploadingBox({ uploadBox, setUploadBox, uploadComplete, uploadTitle }) {
+    if (!uploadBox) {
+        return null;
+    }
+    console.log(uploadTitle);
+    return (
+        <>
+            <div className="upload-box-modal">
+                <ul>
+                    <li
+                        style={{
+                            background: '#AE00B9',
+                            paddingTop: 10,
+                            paddingBottom: 10,
+                            color: 'white',
+                            display: 'flex',
+                        }}
+                    >
+                        <span style={{ width: 'calc(100% - 14px)' }}>1 upload complete</span>
+                        <img onClick={() => setUploadBox(false)} src={CrossIcon} alt="Cross" />
+                    </li>
+
+                    <li
+                        style={{
+                            paddingTop: 10,
+                            color: 'black',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <span style={{ width: 'calc(100% - 30px)' }}>{uploadTitle}</span>
+                        {uploadComplete ? (
+                            <img style={{ width: 20 }} src={CompIcon} alt="Complete" />
+                        ) : (
+                            <div className="lds-ring">
+                                <div />
+                                <div />
+                                <div />
+                                <div />
+                            </div>
+                        )}
+                    </li>
+                </ul>
+            </div>
+        </>
+    );
+}
 function UserAuthHandler() {
+    const [uploadBox, setUploadBox] = useState(false);
+    const [uploadComplete, setUploadComplete] = useState(false);
+    const [uploadTitle, setUploadTitle] = useState([]);
     return (
         <div className={['h-100 user-h-area', 'browser browser-4xl'].join(' ')}>
             <FixedHeaderControl>
@@ -15,7 +68,11 @@ function UserAuthHandler() {
                 <div className="container h-100">
                     <div className="line line-no-wrap h-100">
                         <div className="cell cell-profile h-100 sidebar-menu-area">
-                            <SidebarMenuSection />
+                            <SidebarMenuSection
+                                setUploadBox={setUploadBox}
+                                setUploadComplete={setUploadComplete}
+                                setUploadTitle={setUploadTitle}
+                            />
                         </div>
                         <div className="cell cell-content h-100">
                             <div className="content-section">
@@ -25,6 +82,12 @@ function UserAuthHandler() {
                     </div>
                 </div>
             </div>
+            <UploadingBox
+                uploadBox={uploadBox}
+                setUploadBox={setUploadBox}
+                uploadComplete={uploadComplete}
+                uploadTitle={uploadTitle}
+            />
         </div>
     );
 }

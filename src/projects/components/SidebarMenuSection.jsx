@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -11,8 +12,6 @@ import MyDriveIcon from '../../assets/images/myDrive.svg';
 import PlusIcon from '../../assets/images/PlusIcon.svg';
 import ShareDriveIcon from '../../assets/images/shareDrive.svg';
 import Trash from '../../assets/images/trash.svg';
-import ConfigApi from '../../configs/ConfigApi';
-import AxiosAuth from '../utils/AxiosAuth';
 import FolderCreateModal from './modals/FolderCreateModal';
 
 const list = [
@@ -36,7 +35,15 @@ const list = [
     },
 ];
 
-function AddBox({ show, myRef, setShow, setFCreateShow }) {
+function AddBox({
+    show,
+    myRef,
+    setShow,
+    setFCreateShow,
+    setUploadBox,
+    setUploadComplete,
+    setUploadTitle,
+}) {
     const uploadRef = createRef();
 
     const handlefCreate = () => {
@@ -44,21 +51,26 @@ function AddBox({ show, myRef, setShow, setFCreateShow }) {
         setShow(false);
     };
     const handleOnFileChange = async ({ target }) => {
+        setUploadBox(true);
+        setShow(false);
         const { files } = target;
         for (let x = 0; x < files.length; x += 1) {
-            const formData = new FormData();
-            formData.append('image', files[x]);
-            await AxiosAuth.post(ConfigApi.API_FILE_UPLOAD, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            })
-                .then((response) => {
-                    console.log(response);
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
+            setUploadTitle([files[x]?.name]);
+            // const formData = new FormData();
+            // formData.append('upload_file', files[x]);
+            // await AxiosAuth.post(ConfigApi.FILE_UPLOAD, formData, {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //     },
+            // })
+            //     .then((response) => {
+            //         if (response.data.error === 0) {
+            //             setUploadComplete(true);
+            //         }
+            //     })
+            //     .catch((err) => {
+            //         console.log(err);
+            //     });
         }
     };
     if (!show) {
@@ -97,7 +109,6 @@ function AddBox({ show, myRef, setShow, setFCreateShow }) {
                         onChange={handleOnFileChange}
                         multiple
                         style={{ display: 'none' }}
-                        accept="image/png, image/jpeg"
                     />
                 </ul>
             </div>
@@ -131,7 +142,15 @@ const OptionSubList = ({ clickOnEndItem, subMenu, openL1, setOpenL1 }) => {
     );
 };
 
-const OptionList = ({ removeMenus = [], clickOnEndItem, menuL0, menuL1 }) => {
+const OptionList = ({
+    removeMenus = [],
+    clickOnEndItem,
+    menuL0,
+    menuL1,
+    setUploadBox,
+    setUploadComplete,
+    setUploadTitle,
+}) => {
     const [openL0, setOpenL0] = useState(menuL0);
     const [openL1, setOpenL1] = useState(menuL1);
     const [addBoxShow, setAddBoxShow] = useState(false);
@@ -172,6 +191,9 @@ const OptionList = ({ removeMenus = [], clickOnEndItem, menuL0, menuL1 }) => {
                         setShow={setAddBoxShow}
                         myRef={ref}
                         setFCreateShow={setFCreateShow}
+                        setUploadBox={setUploadBox}
+                        setUploadComplete={setUploadComplete}
+                        setUploadTitle={setUploadTitle}
                     />
                     <FolderCreateModal show={fCreateShow} setFCreateShow={setFCreateShow} />
                 </li>
@@ -230,7 +252,13 @@ const OptionList = ({ removeMenus = [], clickOnEndItem, menuL0, menuL1 }) => {
     );
 };
 
-function SidebarMenuSection({ hideProfile, clickOnEndItem }) {
+function SidebarMenuSection({
+    hideProfile,
+    clickOnEndItem,
+    setUploadBox,
+    setUploadComplete,
+    setUploadTitle,
+}) {
     const removeMenus = [];
     if (hideProfile) {
         removeMenus.push('dashboard');
@@ -243,6 +271,9 @@ function SidebarMenuSection({ hideProfile, clickOnEndItem }) {
                 menuL1="server_vps"
                 removeMenus={removeMenus}
                 clickOnEndItem={clickOnEndItem}
+                setUploadBox={setUploadBox}
+                setUploadComplete={setUploadComplete}
+                setUploadTitle={setUploadTitle}
             />
         </div>
     );

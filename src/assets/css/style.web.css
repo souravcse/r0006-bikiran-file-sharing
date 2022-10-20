@@ -57,6 +57,30 @@
 .my-drive-list > span {
   font-size: 14px;
 }
+
+.my-drive-list-file {
+  width: 19%;
+  height: 240px;
+  margin-right: 1%;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  padding: 12px 16px;
+  border: 1px solid #e7e7ec;
+  opacity: 0.8;
+  display: flex;
+  align-items: flex-start;
+}
+.my-drive-list-file:hover {
+  background-color: #f0f0f0;
+}
+.my-drive-list-file > img {
+  margin-right: 15px;
+  height: 16px;
+}
+.my-drive-list-file > span {
+  font-size: 14px;
+}
+
 .add-new-li {
   position: relative;
 }
@@ -124,4 +148,65 @@
 }
 .folder-create-button > button:last-child {
   color: blue;
+}
+.upload-box-modal {
+  width: 360px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+  padding: 0 0 0 0;
+  z-index: 99;
+  border-radius: 5px;
+  box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%),
+    0px 3px 14px 2px rgb(0 0 0 / 12%), 0px 5px 5px -3px rgb(0 0 0 / 20%);
+  border-bottom-right-radius: unset;
+  border-bottom-left-radius: unset;
+}
+
+.upload-box-modal ul {
+  padding-left: 0;
+}
+.upload-box-modal ul li {
+  list-style: none;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  line-height: 30px;
+  cursor: pointer;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.lds-ring {
+  display: inline-block;
+  position: relative;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #000000;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #000000 transparent transparent transparent;
+  top: -10px;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
