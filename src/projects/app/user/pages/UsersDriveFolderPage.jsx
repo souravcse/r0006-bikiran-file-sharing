@@ -21,10 +21,11 @@ function UsersDriveFolderPage() {
             }
         );
     }, [parentSl]);
+    console.log(files);
     return (
         <>
             <MyDriveTitle />
-            {files.length > 0 ? (
+            {files?.folder?.length > 0 || files?.file?.length > 0 ? (
                 <div className="my-drive">
                     <div className="my-drive-sub-title">Folder</div>
                     {files?.folder?.map((folAr) => (
