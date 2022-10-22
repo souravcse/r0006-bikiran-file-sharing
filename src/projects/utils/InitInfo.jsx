@@ -7,7 +7,6 @@ function InitInfo() {
         show: !!storeStates?.initData?.initId,
         initData: storeStates?.initData,
         initId: storeStates?.initData?.initId,
-        logInId: storeStates?.loginId,
     };
 }
 

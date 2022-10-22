@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -44,8 +45,11 @@ function AddBox({
     setUploadBox,
     setUploadComplete,
     setUploadTitle,
+    setReloadId,
 }) {
     const uploadRef = createRef();
+    const uploadRefFolder = createRef();
+
     const params = useParams();
     const parentSl = params?.folderSl ? params?.folderSl : 1;
 
@@ -72,6 +76,36 @@ function AddBox({
                 .then((response) => {
                     if (response.data.error === 0) {
                         setUploadComplete((oldItemsx) => [...oldItemsx, files[x]?.name]);
+                        setReloadId(Math.random);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    };
+    const handleOnFolderChange = async ({ target }) => {
+        setUploadBox(true);
+        setShow(false);
+        const { files } = target;
+
+        for (let xx = 0; xx < files.length; xx += 1) {
+            setUploadTitle((oldItems) => [...oldItems, files[xx]?.name]);
+        }
+        for (let x = 0; x < files.length; x += 1) {
+            const formData = new FormData();
+            formData.append('upload_file', files[x]);
+            await AxiosAuth.post(ConfigApi.FOLDER_UPLOAD.replace(':folderSl', parentSl), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    webkitRelativePath: files[x]?.webkitRelativePath,
+                },
+                parentSl,
+            })
+                .then((response) => {
+                    if (response.data.error === 0) {
+                        setUploadComplete((oldItemsx) => [...oldItemsx, files[x]?.name]);
+                        setReloadId(Math.random);
                     }
                 })
                 .catch((err) => {
@@ -105,7 +139,11 @@ function AddBox({
                     >
                         <img src={FileAdd} alt="" /> <span>File Upload</span>
                     </li>
-                    <li>
+                    <li
+                        onClick={() => {
+                            uploadRefFolder.current.click();
+                        }}
+                    >
                         <img src={FolderUp} alt="" /> <span>Folder Upload</span>
                     </li>
                     <input
@@ -115,6 +153,16 @@ function AddBox({
                         onChange={handleOnFileChange}
                         multiple
                         style={{ display: 'none' }}
+                    />
+                    <input
+                        ref={uploadRefFolder}
+                        type="file"
+                        name="folder"
+                        onChange={handleOnFolderChange}
+                        multiple
+                        style={{ display: 'none' }}
+                        webkitdirectory="true"
+                        mozdirectory="true"
                     />
                 </ul>
             </div>
@@ -156,6 +204,7 @@ const OptionList = ({
     setUploadBox,
     setUploadComplete,
     setUploadTitle,
+    setReloadId,
 }) => {
     const [openL0, setOpenL0] = useState(menuL0);
     const [openL1, setOpenL1] = useState(menuL1);
@@ -200,8 +249,13 @@ const OptionList = ({
                         setUploadBox={setUploadBox}
                         setUploadComplete={setUploadComplete}
                         setUploadTitle={setUploadTitle}
+                        setReloadId={setReloadId}
                     />
-                    <FolderCreateModal show={fCreateShow} setFCreateShow={setFCreateShow} />
+                    <FolderCreateModal
+                        show={fCreateShow}
+                        setFCreateShow={setFCreateShow}
+                        setReloadId={setReloadId}
+                    />
                 </li>
                 {list
                     .filter((item) => removeMenus.indexOf(item.id) === -1)
@@ -264,6 +318,7 @@ function SidebarMenuSection({
     setUploadBox,
     setUploadComplete,
     setUploadTitle,
+    setReloadId,
 }) {
     const removeMenus = [];
     if (hideProfile) {
@@ -280,6 +335,7 @@ function SidebarMenuSection({
                 setUploadBox={setUploadBox}
                 setUploadComplete={setUploadComplete}
                 setUploadTitle={setUploadTitle}
+                setReloadId={setReloadId}
             />
         </div>
     );

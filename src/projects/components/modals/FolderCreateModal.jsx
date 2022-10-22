@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 
-function FolderCreateModal({ show, setFCreateShow }) {
+function FolderCreateModal({ show, setFCreateShow, setReloadId }) {
     const params = useParams();
     const parentSl = params?.folderSl ? params?.folderSl : 0;
 
@@ -20,7 +20,8 @@ function FolderCreateModal({ show, setFCreateShow }) {
         AxiosAuth.post(`${ConfigApi.CREATE_FOLDER}`, { folderName, parentSl }).then((response) => {
             if (response.data.error === 0) {
                 setFCreateShow(false);
-                window.location.reload();
+                setReloadId(Math.random);
+                setFolderName('Untitled folder');
             }
         });
     };

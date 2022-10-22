@@ -12,8 +12,13 @@ export default function RouteHandler() {
     const dispatch = useDispatch();
     const { initData } = InitInfo();
     const [show, setShow] = useState(!!initData?.initId);
-
+    const [reloadId, setReloadId] = useState(Math.random);
+    const [selectId, setSelectId] = useState(null);
+    const [disStyle, setDisStyle] = useState(
+        localStorage.getItem('d-style') ? localStorage.getItem('d-style') : '1'
+    );
     useEffect(() => {
+        setDisStyle(localStorage.getItem('d-style') ? localStorage.getItem('d-style') : '1');
         AppInitDispatch(dispatch)
             .then((initStatus) => {
                 setShow(initStatus);
@@ -31,9 +36,31 @@ export default function RouteHandler() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<LoginPage />} />
-                    <Route path="/user/*" element={<UserAuthHandler />}>
-                        <Route path="drive/" element={<UsersDrivePage />} />
-                        <Route path="drive/folder/:folderSl/" element={<UsersDriveFolderPage />} />
+                    <Route path="/user/*" element={<UserAuthHandler setReloadId={setReloadId} />}>
+                        <Route
+                            path="drive/"
+                            element={
+                                <UsersDrivePage
+                                    reloadId={reloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
+                        <Route
+                            path="drive/folder/:folderSl/"
+                            element={
+                                <UsersDriveFolderPage
+                                    reloadId={reloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
                     </Route>
                 </Routes>
             </BrowserRouter>

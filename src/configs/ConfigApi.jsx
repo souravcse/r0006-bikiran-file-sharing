@@ -7,6 +7,7 @@ const ConfigApi = {
     // Folder Create
     CREATE_FOLDER: `${api}/manage/file/folder/create`,
     FILE_UPLOAD: `${api}/manage/file/:folderSl/create`,
+    FOLDER_UPLOAD: `${api}/manage/file/:folderSl/folder/create`,
     GET_FILE: `${api}/manage/file`,
     GET_FILE_DETAIL: `${api}/manage/file/:folderSl/folder`,
 

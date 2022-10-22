@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React, { useState } from 'react';
 
@@ -59,11 +60,10 @@ function UploadingBox({ uploadBox, setUploadBox, uploadComplete, uploadTitle }) 
         </>
     );
 }
-function UserAuthHandler() {
+function UserAuthHandler({ setReloadId }) {
     const [uploadBox, setUploadBox] = useState(false);
     const [uploadComplete, setUploadComplete] = useState([]);
     const [uploadTitle, setUploadTitle] = useState([]);
-
     return (
         <div className={['h-100 user-h-area', 'browser browser-4xl'].join(' ')}>
             <FixedHeaderControl>
@@ -77,6 +77,7 @@ function UserAuthHandler() {
                                 setUploadBox={setUploadBox}
                                 setUploadComplete={setUploadComplete}
                                 setUploadTitle={setUploadTitle}
+                                setReloadId={setReloadId}
                             />
                         </div>
                         <div className="cell cell-content h-100">
