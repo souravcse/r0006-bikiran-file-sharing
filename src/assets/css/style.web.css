@@ -30,6 +30,7 @@
 .my-drive-title > h4 {
   font-size: 20px;
   margin-bottom: 0;
+  width: 150px;
 }
 .my-drive-title-option {
   width: 94%;
