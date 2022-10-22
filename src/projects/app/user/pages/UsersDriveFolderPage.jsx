@@ -26,7 +26,7 @@ function UsersDriveFolderPage({ reloadId, disStyle, setDisStyle, selectId, setSe
 
     return (
         <>
-            <MyDriveTitle disStyle={disStyle} setDisStyle={setDisStyle} />
+            <MyDriveTitle disStyle={disStyle} setDisStyle={setDisStyle} selectId={selectId} />
             {files?.folder?.length > 0 || files?.file?.length > 0 ? (
                 <div className="my-drive">
                     {disStyle === '1' ? (

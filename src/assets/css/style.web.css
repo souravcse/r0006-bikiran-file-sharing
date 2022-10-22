@@ -47,6 +47,22 @@
   background-color: lightgray;
   border-radius: 50%;
 }
+
+.my-drive-select-option {
+  display: flex;
+  justify-content: right;
+}
+.my-drive-select-option button {
+  border: unset;
+  background-color: unset;
+  width: 40px;
+  height: 40px;
+}
+.my-drive-select-option button:hover {
+  border: unset;
+  background-color: lightgray;
+  border-radius: 50%;
+}
 .my-drive-sub-title {
   width: 100%;
   margin-bottom: 20px;
