@@ -8,13 +8,19 @@ import AxiosAuth from '../../utils/AxiosAuth';
 function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectId }) {
     const [file, setFile] = useState(null);
     const [shareEmail, setShareEmail] = useState(null);
+    const [shareMsg, setShareMsg] = useState(null);
     const [isNotify, setIsNotify] = useState(1);
+    const [gStatus, setGStatus] = useState();
+    const [accessType, setAccessType] = useState();
 
     const handleShareEmail = (e) => {
         setShareEmail(e.target.value);
     };
     const handleNotify = () => {
         setIsNotify(!isNotify);
+    };
+    const handleMessage = (e) => {
+        setShareMsg(e.target.value);
     };
     const handleTrash = () => {
         AxiosAuth.post(`${ConfigApi.FILE_TRASH.replace(':fileSl', selectId)}`).then((response) => {
@@ -25,11 +31,40 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
             }
         });
     };
+    const handleFileGlobalView = (e) => {
+        setGStatus(e.target.value);
+        AxiosAuth.post(`${ConfigApi.FILE_GLOBAL_ST.replace(':fileSl', selectId)}`, {
+            gStatus: e.target.value,
+        }).then((response) => {
+            console.log(response);
+        });
+    };
+    const handleFileAccessType = (e) => {
+        setAccessType(e.target.value);
+        AxiosAuth.post(`${ConfigApi.FILE_ACCESS_TYPE.replace(':fileSl', selectId)}`, {
+            accessType: e.target.value,
+        }).then((response) => {
+            console.log(response);
+        });
+    };
+
+    const handleShareSend = () => {
+        AxiosAuth.post(`${ConfigApi.FILE_SHARE_SEND.replace(':fileSl', selectId)}`, {
+            shareEmail,
+            isNotify,
+            shareMsg,
+        }).then((response) => {
+            console.log(response);
+        });
+    };
     useEffect(() => {
         AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
             setFile(response.data);
+            setGStatus(response.data?.global_perm);
+            setAccessType(response.data?.is_restricted);
         });
     }, [selectId]);
+
     return (
         <Modal size="md" show={showShare} onHide={() => setShareShow(false)} centered>
             <Modal.Body>
@@ -39,7 +74,7 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
                         type="email"
                         value={shareEmail}
                         placeholder="Add Email"
-                        onChange={handleShareEmail}
+                        onBlur={handleShareEmail}
                         style={{ width: shareEmail !== null ? '80%' : '100%' }}
                     />
                     {shareEmail !== null ? (
@@ -60,51 +95,60 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
                         </>
                     ) : null}
 
-                    {shareEmail !== null && isNotify ? <textarea placeholder="Message" /> : null}
+                    {shareEmail !== null && isNotify ? (
+                        <textarea placeholder="Message" value={shareMsg} onChange={handleMessage} />
+                    ) : null}
                 </div>
                 {shareEmail === null ? (
-                    <div className="share-modal-access">
-                        <h6>People with access</h6>
-                        <div className="share-modal-access-list">
-                            <img src={circleImg} alt="" />
-                            <p>
-                                <b>Sourav Mallick</b>
-                                <br />
-                                <small>souravcmt@gmail.com </small>
-                            </p>
-                            <span>Owner</span>
+                    <>
+                        <div className="share-modal-access">
+                            <h6>People with access</h6>
+                            {file?.shareListAr?.map((sList) => (
+                                <div className="share-modal-access-list">
+                                    <img src={circleImg} alt="" />
+                                    <p>
+                                        <b>{sList?.userName}</b>
+                                        <br />
+                                        <small>{sList?.userEmail}</small>
+                                    </p>
+                                    <span>{sList?.status}</span>
+                                </div>
+                            ))}
                         </div>
-                    </div>
+                        <div className="share-modal-access">
+                            <h6>General access</h6>
+                            <div className="share-modal-access-list">
+                                <img src={circleImg} alt="" />
+                                <p>
+                                    <b>
+                                        <select value={accessType} onChange={handleFileAccessType}>
+                                            <option value="1">Restricted</option>
+                                            <option value="0">Anyone use link</option>
+                                        </select>
+                                    </b>
+                                    <br />
+                                    <small>Anyone on the internet with the link can view</small>
+                                </p>
+                                {accessType?.toString() === '0' ? (
+                                    <span>
+                                        <select value={gStatus} onChange={handleFileGlobalView}>
+                                            <option value="viewer">Viewer</option>
+                                            <option value="editor">Editor</option>
+                                            <option value="manager">Manager</option>
+                                        </select>
+                                    </span>
+                                ) : null}
+                            </div>
+                        </div>
+                    </>
                 ) : null}
-                <div className="share-modal-access">
-                    <h6>General access</h6>
-                    <div className="share-modal-access-list">
-                        <img src={circleImg} alt="" />
-                        <p>
-                            <b>
-                                <select>
-                                    <option value="restricted">Restricted</option>
-                                    <option value="anyone">Anyone use link</option>
-                                </select>
-                            </b>
-                            <br />
-                            <small>Anyone on the internet with the link can view</small>
-                        </p>
-                        <span>
-                            <select>
-                                <option value="viewer">Viewer</option>
-                                <option value="editor">Editor</option>
-                                <option value="manager">Manager</option>
-                            </select>
-                        </span>
-                    </div>
-                </div>
+
                 <div className="folder-create-button">
                     <button type="button" onClick={() => setShareShow(false)}>
                         Cancel
                     </button>
                     {shareEmail !== null ? (
-                        <button type="button" onClick={handleTrash}>
+                        <button type="button" onClick={handleShareSend}>
                             Send
                         </button>
                     ) : (

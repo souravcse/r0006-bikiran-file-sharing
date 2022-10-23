@@ -12,6 +12,9 @@ const ConfigApi = {
     GET_FILE_DETAIL: `${api}/manage/file/:folderSl/folder`,
     GET_DETAIL: `${api}/manage/file/:fileSl/detail`,
     FILE_TRASH: `${api}/manage/file/:fileSl/trash`,
+    FILE_GLOBAL_ST: `${api}/manage/file/:fileSl/global-status`,
+    FILE_ACCESS_TYPE: `${api}/manage/file/:fileSl/access`,
+    FILE_SHARE_SEND: `${api}/manage/file/:fileSl/share-send`,
 
     // Search
     API_DOMAIN_DATA: `${api}/search/result/`,
