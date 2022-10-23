@@ -10,6 +10,8 @@ const ConfigApi = {
     FOLDER_UPLOAD: `${api}/manage/file/:folderSl/folder/create`,
     GET_FILE: `${api}/manage/file`,
     GET_FILE_DETAIL: `${api}/manage/file/:folderSl/folder`,
+    GET_DETAIL: `${api}/manage/file/:fileSl/detail`,
+    FILE_TRASH: `${api}/manage/file/:fileSl/trash`,
 
     // Search
     API_DOMAIN_DATA: `${api}/search/result/`,

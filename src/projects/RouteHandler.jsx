@@ -42,6 +42,7 @@ export default function RouteHandler() {
                             element={
                                 <UsersDrivePage
                                     reloadId={reloadId}
+                                    setReloadId={setReloadId}
                                     disStyle={disStyle}
                                     setDisStyle={setDisStyle}
                                     selectId={selectId}
@@ -54,6 +55,7 @@ export default function RouteHandler() {
                             element={
                                 <UsersDriveFolderPage
                                     reloadId={reloadId}
+                                    setReloadId={setReloadId}
                                     disStyle={disStyle}
                                     setDisStyle={setDisStyle}
                                     selectId={selectId}

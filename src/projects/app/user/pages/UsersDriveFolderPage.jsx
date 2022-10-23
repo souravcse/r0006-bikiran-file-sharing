@@ -10,7 +10,14 @@ import FileListView from '../section/FileListView';
 import FolderGridView from '../section/FolderGridView';
 import FolderListView from '../section/FolderListView';
 
-function UsersDriveFolderPage({ reloadId, disStyle, setDisStyle, selectId, setSelectId }) {
+function UsersDriveFolderPage({
+    reloadId,
+    setReloadId,
+    disStyle,
+    setDisStyle,
+    selectId,
+    setSelectId,
+}) {
     const [files, setFiles] = useState([]);
 
     const params = useParams();
@@ -26,7 +33,13 @@ function UsersDriveFolderPage({ reloadId, disStyle, setDisStyle, selectId, setSe
 
     return (
         <>
-            <MyDriveTitle disStyle={disStyle} setDisStyle={setDisStyle} selectId={selectId} />
+            <MyDriveTitle
+                disStyle={disStyle}
+                setDisStyle={setDisStyle}
+                selectId={selectId}
+                setSelectId={setSelectId}
+                setReloadId={setReloadId}
+            />
             {files?.folder?.length > 0 || files?.file?.length > 0 ? (
                 <div className="my-drive">
                     {disStyle === '1' ? (
