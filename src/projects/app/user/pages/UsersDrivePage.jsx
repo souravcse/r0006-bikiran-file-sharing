@@ -16,7 +16,7 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
             setFiles(response.data.fileList_ar);
         });
     }, [reloadId]);
-    console.log(selectId);
+
     if (!disStyle) {
         return null;
     }

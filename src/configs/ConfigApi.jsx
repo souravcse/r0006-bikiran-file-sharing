@@ -4,6 +4,7 @@ const ConfigApi = {
     API_APP_INIT: `${api}/api/init`,
     // Folder Create
     LOGIN: `${api}/login`,
+    REGISTER: `${api}/register`,
     // Folder Create
     CREATE_FOLDER: `${api}/manage/file/folder/create`,
     FILE_UPLOAD: `${api}/manage/file/:folderSl/create`,
