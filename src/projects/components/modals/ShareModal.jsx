@@ -11,7 +11,9 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
     const [shareMsg, setShareMsg] = useState(null);
     const [isNotify, setIsNotify] = useState(1);
     const [gStatus, setGStatus] = useState();
+    const [shareSt, setShareSt] = useState('editor');
     const [accessType, setAccessType] = useState();
+    const [sendError, setSendError] = useState();
 
     const handleShareEmail = (e) => {
         setShareEmail(e.target.value);
@@ -21,6 +23,9 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
     };
     const handleMessage = (e) => {
         setShareMsg(e.target.value);
+    };
+    const handleGStatus = (e) => {
+        setShareSt(e.target.value);
     };
     const handleTrash = () => {
         AxiosAuth.post(`${ConfigApi.FILE_TRASH.replace(':fileSl', selectId)}`).then((response) => {
@@ -53,8 +58,25 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
             shareEmail,
             isNotify,
             shareMsg,
+            shareSt,
         }).then((response) => {
-            console.log(response);
+            if (response?.data?.error === 3) {
+                setSendError(response?.data?.error);
+            }
+            if (response?.data?.error === 0) {
+                setShareShow(false);
+            }
+        });
+    };
+    const handleShareSendNonAcc = () => {
+        AxiosAuth.post(`${ConfigApi.FILE_SHARE_SEND_NON_ACC.replace(':fileSl', selectId)}`, {
+            shareEmail,
+            shareSt,
+        }).then((response) => {
+            if (response?.data?.error === 0) {
+                setSendError(response?.data?.error);
+                setShareShow(false);
+            }
         });
     };
     useEffect(() => {
@@ -79,7 +101,7 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
                     />
                     {shareEmail !== null ? (
                         <>
-                            <select>
+                            <select value={shareSt} onChange={handleGStatus}>
                                 <option value="viewer">Viewer</option>
                                 <option value="editor">Editor</option>
                                 <option value="manager">Manager</option>
@@ -97,6 +119,24 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
 
                     {shareEmail !== null && isNotify ? (
                         <textarea placeholder="Message" value={shareMsg} onChange={handleMessage} />
+                    ) : null}
+
+                    {sendError === 3 ? (
+                        <div className="share-modal-no-acc">
+                            <h6>Share to non-account?</h6>
+                            <p>
+                                You are sending an invitation to {shareEmail}. Anyone holding this
+                                invitation will have access.
+                            </p>
+                            <div className="share-modal-no-acc-btn">
+                                <button type="button" onClick={() => setSendError(false)}>
+                                    Cancel
+                                </button>
+                                <button type="button" onClick={handleShareSendNonAcc}>
+                                    Share anyway
+                                </button>
+                            </div>
+                        </div>
                     ) : null}
                 </div>
                 {shareEmail === null ? (

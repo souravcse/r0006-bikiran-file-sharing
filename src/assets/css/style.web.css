@@ -248,6 +248,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+  position: relative;
 }
 .share-modal-input > input {
   height: 50px;
@@ -326,6 +327,30 @@
 }
 .share-modal-access-list select:focus-visible {
   outline: unset;
+}
+.share-modal-no-acc {
+  position: absolute;
+  height: auto;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px 0 rgb(60 64 67 / 30%), 0 4px 8px 3px rgb(60 64 67 / 15%);
+  border-radius: 5px;
+}
+.share-modal-no-acc > h6 {
+  font-size: 20px;
+}
+.share-modal-no-acc > p {
+  opacity: 0.7;
+}
+.share-modal-no-acc-btn > button {
+  border: unset;
+  background-color: unset;
+}
+.share-modal-no-acc-btn > button:first-child {
+  color: red;
+}
+.share-modal-no-acc-btn > button:last-child {
+  color: #ae00b9;
 }
 .add-new-li {
   position: relative;

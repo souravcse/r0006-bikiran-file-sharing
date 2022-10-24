@@ -15,7 +15,7 @@ const ConfigApi = {
     FILE_GLOBAL_ST: `${api}/manage/file/:fileSl/global-status`,
     FILE_ACCESS_TYPE: `${api}/manage/file/:fileSl/access`,
     FILE_SHARE_SEND: `${api}/manage/file/:fileSl/share-send`,
-
+    FILE_SHARE_SEND_NON_ACC: `${api}/manage/file/:fileSl/share-send/non-acc`,
     // Search
     API_DOMAIN_DATA: `${api}/search/result/`,
     API_DOMAIN_DATA_INFO: `${api}/web-info/data/`,
