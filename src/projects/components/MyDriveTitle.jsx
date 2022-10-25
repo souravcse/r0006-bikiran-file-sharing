@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 
-import DetailIcon from '../../assets/images/DetailIcon.svg';
 import DotbarIcon from '../../assets/images/dotBar.svg';
 import GridIcon from '../../assets/images/GridIcon.svg';
 import ListIcon from '../../assets/images/ListIcon.svg';
 import DeleteIcon from '../../assets/images/trash.svg';
 import AdduserIcon from '../../assets/images/user.svg';
+import ItemMenuBox from './ItemMenuBox';
+import MoveModal from './modals/MoveModal';
 import MoveToTrashModal from './modals/MoveToTrashModal';
+import RenameModal from './modals/RenameModal';
 import ShareModal from './modals/ShareModal';
 
 function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectId }) {
     const [showTrash, setTrashShow] = useState(false);
     const [showShare, setShareShow] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
+    const [showRename, setShowRename] = useState(false);
+    const [showMove, setShowMove] = useState(false);
 
     const handleStyle = (e) => {
         setDisStyle(e);
         localStorage.setItem('d-style', e);
     };
-    console.log(showShare);
+
     return (
         <>
             <div className="my-drive-title">
@@ -32,7 +37,7 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                             <button type="button" onClick={() => setTrashShow(true)}>
                                 <img style={{ height: 18 }} src={DeleteIcon} alt="Delete Icon" />
                             </button>
-                            <button type="button">
+                            <button type="button" onClick={() => setShowMenu(true)}>
                                 <img src={DotbarIcon} alt="Dot Bar Icon" />
                             </button>
                         </div>
@@ -47,25 +52,59 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                         </button>
                     )}
 
-                    <button type="button">
+                    {/* <button type="button">
                         <img src={DetailIcon} alt="" />
-                    </button>
+                    </button> */}
                 </div>
+                {showMenu ? (
+                    <ItemMenuBox
+                        selectId={selectId}
+                        showMenu={showMenu}
+                        setShowMenu={setShowMenu}
+                        setShowRename={setShowRename}
+                        setShowMove={setShowMove}
+                    />
+                ) : null}
             </div>
-            <MoveToTrashModal
-                showTrash={showTrash}
-                setTrashShow={setTrashShow}
-                setReloadId={setReloadId}
-                selectId={selectId}
-                setSelectId={setSelectId}
-            />
-            <ShareModal
-                showShare={showShare}
-                setShareShow={setShareShow}
-                setReloadId={setReloadId}
-                selectId={selectId}
-                setSelectId={setSelectId}
-            />
+
+            {showTrash ? (
+                <MoveToTrashModal
+                    showTrash={showTrash}
+                    setTrashShow={setTrashShow}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                />
+            ) : null}
+
+            {showShare ? (
+                <ShareModal
+                    showShare={showShare}
+                    setShareShow={setShareShow}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                />
+            ) : null}
+
+            {showRename ? (
+                <RenameModal
+                    showRename={showRename}
+                    setShowRename={setShowRename}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setShowMenu={setShowMenu}
+                />
+            ) : null}
+
+            {showMove ? (
+                <MoveModal
+                    showMove={showMove}
+                    setShowMove={setShowMove}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                />
+            ) : null}
         </>
     );
 }

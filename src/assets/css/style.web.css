@@ -27,6 +27,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 .my-drive-title > h4 {
   font-size: 20px;
@@ -130,6 +131,13 @@
 }
 .my-drive-list-file-info > span {
   font-size: 14px;
+}
+
+.my-drive-list-2 {
+  width: 32%;
+}
+.my-drive-list-file-2 {
+  width: 32%;
 }
 .my-drive > table {
   width: 100%;
@@ -244,6 +252,55 @@
 }
 .my-drive-detail-properties-info > table > tr:last-child {
   border-bottom: unset;
+}
+.top-box {
+  z-index: 2;
+  opacity: 0;
+  width: 300px;
+  visibility: hidden;
+  right: -15px;
+  top: 46px;
+  position: absolute;
+}
+.top-box.show {
+  opacity: 1;
+  visibility: visible;
+}
+.top-box-foreground {
+  width: 100%;
+  height: 100%;
+  display: none;
+  left: 0;
+  top: 0;
+  cursor: auto;
+  z-index: 1;
+}
+.top-box-foreground.show {
+  display: block;
+  position: fixed;
+}
+.drive-menu-box {
+  position: absolute;
+  background-color: white;
+  box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%),
+    0px 3px 14px 2px rgb(0 0 0 / 12%), 0px 5px 5px -3px rgb(0 0 0 / 20%);
+  top: 56px;
+  right: 64px;
+  border-radius: 6px;
+  padding: 20px 0;
+  width: 350px;
+}
+.drive-menu-box ul {
+  padding-left: 0;
+}
+.drive-menu-box ul li {
+  padding: 0 25px;
+  list-style: none;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+.drive-menu-box ul li:hover {
+  background-color: #ae00b91c;
 }
 .share-modal-input {
   display: flex;
@@ -448,6 +505,28 @@
   cursor: pointer;
   padding-left: 15px;
   padding-right: 15px;
+}
+
+.notication-popup {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  width: 300px;
+  height: 50px;
+  background-color: #ae00b9;
+  display: flex;
+  z-index: 999;
+  padding: 10px;
+  align-items: center;
+}
+.notication-popup > p {
+  color: white;
+  width: calc(100% - 20px);
+  margin-bottom: 0;
+}
+.notication-popup > button {
+  border: unset;
+  background-color: unset;
 }
 .lds-ring {
   display: inline-block;

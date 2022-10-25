@@ -10,7 +10,7 @@ function FileGridView({ files, selectId, setSelectId }) {
             {files?.file?.length > 0 ? <div className="my-drive-sub-title">Files</div> : null}
             {files?.file?.map((fileAr) => (
                 <div
-                    className={`my-drive-list-file ${
+                    className={`my-drive-list-file ${selectId ? 'my-drive-list-file-2' : ''} ${
                         selectId === fileAr?.sl ? 'my-drive-list-selected' : ''
                     }`}
                     onClick={() => setSelectId(fileAr?.sl)}

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import circleImg from '../../../assets/images/circleUser.svg';
 
 import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
+import NotificationPopup from '../../utils/NotificationPopup';
 
-function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectId }) {
+function ShareModal({ showShare, setShareShow, selectId, setSelectId }) {
+    const dispatch = useDispatch();
     const [file, setFile] = useState(null);
     const [shareEmail, setShareEmail] = useState(null);
     const [shareMsg, setShareMsg] = useState(null);
@@ -27,21 +30,24 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
     const handleGStatus = (e) => {
         setShareSt(e.target.value);
     };
-    const handleTrash = () => {
-        AxiosAuth.post(`${ConfigApi.FILE_TRASH.replace(':fileSl', selectId)}`).then((response) => {
-            if (response.data.error === 0) {
-                setReloadId(Math.random);
-                setShareShow(false);
-                setSelectId(null);
-            }
-        });
+    const handleDone = () => {
+        setShareShow(false);
+        setSelectId('');
+        // AxiosAuth.post(`${ConfigApi.FILE_TRASH.replace(':fileSl', selectId)}`).then((response) => {
+        //     if (response.data.error === 0) {
+        //         setReloadId(Math.random);
+        //         setShareShow(false);
+        //         setSelectId(null);
+        //         NotificationPopup(response, dispatch);
+        //     }
+        // });
     };
     const handleFileGlobalView = (e) => {
         setGStatus(e.target.value);
         AxiosAuth.post(`${ConfigApi.FILE_GLOBAL_ST.replace(':fileSl', selectId)}`, {
             gStatus: e.target.value,
         }).then((response) => {
-            console.log(response);
+            NotificationPopup(response, dispatch);
         });
     };
     const handleFileAccessType = (e) => {
@@ -49,7 +55,7 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
         AxiosAuth.post(`${ConfigApi.FILE_ACCESS_TYPE.replace(':fileSl', selectId)}`, {
             accessType: e.target.value,
         }).then((response) => {
-            console.log(response);
+            NotificationPopup(response, dispatch);
         });
     };
 
@@ -62,9 +68,11 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
         }).then((response) => {
             if (response?.data?.error === 3) {
                 setSendError(response?.data?.error);
+                NotificationPopup(response, dispatch);
             }
             if (response?.data?.error === 0) {
                 setShareShow(false);
+                NotificationPopup(response, dispatch);
             }
         });
     };
@@ -76,6 +84,7 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
             if (response?.data?.error === 0) {
                 setSendError(response?.data?.error);
                 setShareShow(false);
+                NotificationPopup(response, dispatch);
             }
         });
     };
@@ -192,7 +201,7 @@ function ShareModal({ showShare, setShareShow, setReloadId, selectId, setSelectI
                             Send
                         </button>
                     ) : (
-                        <button type="button" onClick={handleTrash}>
+                        <button type="button" onClick={handleDone}>
                             Done
                         </button>
                     )}

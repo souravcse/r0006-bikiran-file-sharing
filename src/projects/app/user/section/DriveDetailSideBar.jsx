@@ -7,13 +7,13 @@ import ConfigApi from '../../../../configs/ConfigApi';
 import AxiosAuth from '../../../utils/AxiosAuth';
 import FilePreview from '../../../utils/FilePreview';
 
-function DriveDetailSideBar({ selectId, setSelectId }) {
+function DriveDetailSideBar({ reloadId, selectId, setSelectId }) {
     const [file, setFile] = useState(null);
     useEffect(() => {
         AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
             setFile(response.data);
         });
-    }, [selectId]);
+    }, [selectId, reloadId]);
 
     return (
         <div className="my-drive-detail">

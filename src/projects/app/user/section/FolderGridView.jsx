@@ -8,7 +8,6 @@ function FolderGridView({ files, selectId, setSelectId }) {
     const handleListFolder = (e) => {
         navigate(`/user/drive/folder/${e}/`);
     };
-    console.log(selectId);
     return (
         <>
             {files?.folder?.length > 0 ? <div className="my-drive-sub-title">Folder</div> : null}
@@ -16,7 +15,7 @@ function FolderGridView({ files, selectId, setSelectId }) {
                 <div
                     onClick={() => setSelectId(folAr?.sl)}
                     onDoubleClick={() => handleListFolder(folAr?.sl)}
-                    className={`my-drive-list ${
+                    className={`my-drive-list  ${selectId ? 'my-drive-list-2' : ''} ${
                         selectId === folAr?.sl ? 'my-drive-list-selected' : ''
                     }`}
                     key={folAr?.sl}

@@ -6,6 +6,7 @@ import RegisterPage from './app/system/pages/RegisterPage';
 import UserAuthHandler from './app/user/models/UserAuthHandler';
 import UsersDriveFolderPage from './app/user/pages/UsersDriveFolderPage';
 import UsersDrivePage from './app/user/pages/UsersDrivePage';
+import NotificationPopUpCommon from './components/NotificationPopUpCommon';
 import AppInitDispatch from './dispatches/AppInitDispatch';
 import InitInfo from './utils/InitInfo';
 
@@ -35,6 +36,7 @@ export default function RouteHandler() {
     return (
         <>
             <BrowserRouter>
+                <NotificationPopUpCommon />
                 <Routes>
                     <Route path="/" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />

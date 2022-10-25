@@ -82,7 +82,11 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
                 </div>
             )}
             {selectId !== null ? (
-                <DriveDetailSideBar selectId={selectId} setSelectId={setSelectId} />
+                <DriveDetailSideBar
+                    reloadId={reloadId}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                />
             ) : null}
         </>
     );

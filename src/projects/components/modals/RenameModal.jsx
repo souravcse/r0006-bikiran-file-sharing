@@ -1,48 +1,54 @@
 /* eslint-disable no-loop-func */
 /* eslint-disable no-await-in-loop */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 import NotificationPopup from '../../utils/NotificationPopup';
 
-function FolderCreateModal({ show, setFCreateShow, setReloadId }) {
+function RenameModal({ showRename, setShowRename, setReloadId, selectId, setShowMenu }) {
     const dispatch = useDispatch();
-    const params = useParams();
-    const parentSl = params?.folderSl ? params?.folderSl : 0;
 
     const [folderName, setFolderName] = useState('Untitled folder');
     const handleFolder = (e) => {
         setFolderName(e.target.value);
     };
 
-    const handleCreateFolder = () => {
-        AxiosAuth.post(`${ConfigApi.CREATE_FOLDER}`, { folderName, parentSl }).then((response) => {
+    const handleRenameFolder = () => {
+        AxiosAuth.post(`${ConfigApi.RENAME_FILE.replace(':fileSl', selectId)}`, {
+            file_name: folderName,
+            selectId,
+        }).then((response) => {
             if (response.data.error === 0) {
-                setFCreateShow(false);
+                setShowRename(false);
                 setReloadId(Math.random);
-                setFolderName('Untitled folder');
+                setFolderName('');
                 NotificationPopup(response, dispatch);
+                setShowMenu(false);
             }
         });
     };
+    useEffect(() => {
+        AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
+            setFolderName(response.data?.title);
+        });
+    }, [selectId]);
 
     return (
-        <Modal size="sm" show={show} onHide={() => setFCreateShow(false)} centered>
+        <Modal size="sm" show={showRename} onHide={() => setShowRename(false)} centered>
             <Modal.Body>
-                <h5>New Folder</h5>
+                <h5>Rename</h5>
                 <div className="folder-create-input">
                     <input type="text" value={folderName} onChange={handleFolder} />
                 </div>
                 <div className="folder-create-button">
-                    <button type="button" onClick={() => setFCreateShow(false)}>
+                    <button type="button" onClick={() => setShowRename(false)}>
                         Cancel
                     </button>
-                    <button type="button" onClick={handleCreateFolder}>
-                        Create
+                    <button type="button" onClick={handleRenameFolder}>
+                        Ok
                     </button>
                 </div>
             </Modal.Body>
@@ -50,4 +56,4 @@ function FolderCreateModal({ show, setFCreateShow, setReloadId }) {
     );
 }
 
-export default FolderCreateModal;
+export default RenameModal;
