@@ -103,6 +103,8 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                     setShowMove={setShowMove}
                     setReloadId={setReloadId}
                     selectId={selectId}
+                    setShowMenu={setShowMenu}
+                    setSelectId={setSelectId}
                 />
             ) : null}
         </>

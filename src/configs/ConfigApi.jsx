@@ -19,6 +19,7 @@ const ConfigApi = {
     FILE_SHARE_SEND_NON_ACC: `${api}/manage/file/:fileSl/share-send/non-acc`,
 
     RENAME_FILE: `${api}/manage/file/:fileSl/rename`,
+    MOVE_FILE: `${api}/manage/file/:fileSl/move`,
     // Search
     API_DOMAIN_DATA: `${api}/search/result/`,
     API_DOMAIN_DATA_INFO: `${api}/web-info/data/`,
