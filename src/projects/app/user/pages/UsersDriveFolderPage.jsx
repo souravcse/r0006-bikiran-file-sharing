@@ -24,12 +24,13 @@ function UsersDriveFolderPage({
     const parentSl = params?.folderSl ? params?.folderSl : 0;
 
     useEffect(() => {
+        setSelectId(null);
         AxiosAuth.get(`${ConfigApi.GET_FILE_DETAIL?.replace(':folderSl', parentSl)}`).then(
             (response) => {
                 setFiles(response.data.fileList_ar);
             }
         );
-    }, [parentSl, reloadId]);
+    }, [parentSl, reloadId, setSelectId]);
 
     return (
         <>
@@ -92,6 +93,13 @@ function UsersDriveFolderPage({
                     </div>
                 </div>
             )}
+            {/* {selectId !== null ? (
+                <DriveDetailSideBar
+                    reloadId={reloadId}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                />
+            ) : null} */}
         </>
     );
 }

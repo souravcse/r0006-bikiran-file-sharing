@@ -2,7 +2,8 @@ const api = process.env.REACT_APP_API_URL;
 
 const ConfigApi = {
     API_APP_INIT: `${api}/api/init`,
-    // Folder Create
+    GET_BREADCRUMB: `${api}/manage/file/:folderSl/breadcrumb`,
+    // Auth
     LOGIN: `${api}/login`,
     REGISTER: `${api}/register`,
     // Folder Create
@@ -20,10 +21,6 @@ const ConfigApi = {
 
     RENAME_FILE: `${api}/manage/file/:fileSl/rename`,
     MOVE_FILE: `${api}/manage/file/:fileSl/move`,
-    // Search
-    API_DOMAIN_DATA: `${api}/search/result/`,
-    API_DOMAIN_DATA_INFO: `${api}/web-info/data/`,
-    API_DOMAIN_DATA_SSHOT: `${api}/web-info/screenshot/`,
 };
 
 export default ConfigApi;

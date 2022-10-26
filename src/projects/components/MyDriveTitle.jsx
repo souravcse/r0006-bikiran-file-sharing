@@ -5,6 +5,7 @@ import GridIcon from '../../assets/images/GridIcon.svg';
 import ListIcon from '../../assets/images/ListIcon.svg';
 import DeleteIcon from '../../assets/images/trash.svg';
 import AdduserIcon from '../../assets/images/user.svg';
+import DriveBreadcrumb from './DriveBreadcrumb';
 import ItemMenuBox from './ItemMenuBox';
 import MoveModal from './modals/MoveModal';
 import MoveToTrashModal from './modals/MoveToTrashModal';
@@ -27,7 +28,7 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
         <>
             <div className="my-drive-title">
                 <h4>My Drive</h4>
-
+                <DriveBreadcrumb />
                 <div className="my-drive-title-option">
                     {selectId ? (
                         <div className="my-drive-select-option">
