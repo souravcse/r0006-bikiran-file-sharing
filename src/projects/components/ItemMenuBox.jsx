@@ -1,22 +1,72 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import IconColor from '../../assets/images/color-palette.svg';
+import IconDownload from '../../assets/images/Download.svg';
+import IconMove from '../../assets/images/FileMove.svg';
 import IconOpen from '../../assets/images/FolderOpen.svg';
 import IconRename from '../../assets/images/Rename.svg';
 import IconArrow from '../../assets/images/RightArrow.svg';
-
-import IconDownload from '../../assets/images/Download.svg';
-import IconMove from '../../assets/images/FileMove.svg';
 import IconShare from '../../assets/images/user.svg';
+import ConfigApi from '../../configs/ConfigApi';
+import AxiosAuth from '../utils/AxiosAuth';
+
+const colorList = [
+    {
+        id: '1',
+        color: '#7A7A7A',
+    },
+    {
+        id: '2',
+        color: '#F50303',
+    },
+    {
+        id: '3',
+        color: '#FFF600',
+    },
+    {
+        id: '4',
+        color: '#FFF600',
+    },
+    {
+        id: '5',
+        color: '#AE00B9',
+    },
+    {
+        id: '6',
+        color: '#F50303',
+    },
+];
 
 function ItemMenuBox({
+    fileAr,
     selectId,
     showMenu,
     setShowMenu,
     setShowRename,
     setShowMove,
     setShareShow,
+    setReloadId,
 }) {
+    const [folderColor, setFolderColor] = useState(null);
+
+    const handleFolderColor = (e) => {
+        setFolderColor(e);
+        AxiosAuth.post(`${ConfigApi.COLOR_CHANGE.replace(':folderSl', selectId)}`, {
+            folder_color: e,
+        }).then((response) => {
+            if (response?.data?.error === 0) {
+                setShowMenu(false);
+                setReloadId(Math.random);
+            }
+        });
+    };
+    useEffect(() => {
+        if (fileAr) {
+            setFolderColor(fileAr?.folder_color);
+        }
+    }, [fileAr]);
+    console.log(folderColor);
     return (
         <>
             <div
@@ -57,15 +107,20 @@ function ItemMenuBox({
                     </li>
                     <li className="color-change">
                         <Link>
-                            <img src={IconShare} alt="Share With" /> <span>Change Color</span>
+                            <img src={IconColor} alt="Color Chnage" /> <span>Change Color</span>
                         </Link>
                         <div className="color-change-box">
-                            <button type="button" style={{ background: '#7A7A7A' }} />
-                            <button type="button" style={{ background: '#F50303' }} />
-                            <button type="button" style={{ background: '#FFF600' }} />
-                            <button type="button" style={{ background: '#FFF600' }} />
-                            <button type="button" style={{ background: '#AE00B9' }} />
-                            <button type="button" style={{ background: '#F50303' }} />
+                            {colorList.map((colo) => (
+                                <button
+                                    type="button"
+                                    style={{
+                                        background: colo?.color,
+                                        border: folderColor === colo?.color ? '3px solid' : 'unset',
+                                    }}
+                                    key={colo?.id}
+                                    onClick={() => handleFolderColor(colo?.color)}
+                                />
+                            ))}
                         </div>
                     </li>
                     <li>

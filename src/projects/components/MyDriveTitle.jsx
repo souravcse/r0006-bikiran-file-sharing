@@ -67,12 +67,14 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                 </div>
                 {showMenu ? (
                     <ItemMenuBox
+                        fileAr={file}
                         selectId={selectId}
                         showMenu={showMenu}
                         setShowMenu={setShowMenu}
                         setShowRename={setShowRename}
                         setShowMove={setShowMove}
                         setShareShow={setShareShow}
+                        setReloadId={setReloadId}
                     />
                 ) : null}
             </div>

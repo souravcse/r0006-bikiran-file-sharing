@@ -9,6 +9,7 @@ function FolderGridView({ files, selectId, setSelectId }) {
     const handleListFolder = (e) => {
         navigate(`/user/drive/folder/${e}/`);
     };
+    console.log(files);
     return (
         <>
             {files?.folder?.length > 0 ? <div className="my-drive-sub-title">Folder</div> : null}
@@ -21,7 +22,7 @@ function FolderGridView({ files, selectId, setSelectId }) {
                     }`}
                     key={folAr?.sl}
                 >
-                    <FontAwesomeIcon color="#7A7A7A" icon={faFolder} />
+                    <FontAwesomeIcon color={folAr?.folder_color} icon={faFolder} />
                     <span>{folAr?.title}</span>
                 </div>
             ))}

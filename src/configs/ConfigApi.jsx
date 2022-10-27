@@ -22,6 +22,7 @@ const ConfigApi = {
 
     RENAME_FILE: `${api}/manage/file/:fileSl/rename`,
     MOVE_FILE: `${api}/manage/file/:fileSl/move`,
+    COLOR_CHANGE: `${api}/manage/file/:folderSl/color-change`,
 };
 
 export default ConfigApi;
