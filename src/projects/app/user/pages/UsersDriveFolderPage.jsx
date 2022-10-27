@@ -5,6 +5,7 @@ import DragIcon from '../../../../assets/images/DragIcon.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
 import MyDriveTitle from '../../../components/MyDriveTitle';
 import AxiosAuth from '../../../utils/AxiosAuth';
+import DriveDetailSideBar from '../section/DriveDetailSideBar';
 import FileGridView from '../section/FileGridView';
 import FileListView from '../section/FileListView';
 import FolderGridView from '../section/FolderGridView';
@@ -42,7 +43,7 @@ function UsersDriveFolderPage({
                 setReloadId={setReloadId}
             />
             {files?.folder?.length > 0 || files?.file?.length > 0 ? (
-                <div className="my-drive">
+                <div className="my-drive" style={{ width: selectId !== null ? '70%' : '100%' }}>
                     {disStyle === '1' ? (
                         <>
                             <FolderGridView
@@ -93,13 +94,13 @@ function UsersDriveFolderPage({
                     </div>
                 </div>
             )}
-            {/* {selectId !== null ? (
+            {selectId !== null ? (
                 <DriveDetailSideBar
                     reloadId={reloadId}
                     selectId={selectId}
                     setSelectId={setSelectId}
                 />
-            ) : null} */}
+            ) : null}
         </>
     );
 }

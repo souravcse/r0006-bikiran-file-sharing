@@ -27,7 +27,6 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
     return (
         <>
             <div className="my-drive-title">
-                <h4>My Drive</h4>
                 <DriveBreadcrumb />
                 <div className="my-drive-title-option">
                     {selectId ? (
@@ -64,6 +63,7 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                         setShowMenu={setShowMenu}
                         setShowRename={setShowRename}
                         setShowMove={setShowMove}
+                        setShareShow={setShareShow}
                     />
                 ) : null}
             </div>

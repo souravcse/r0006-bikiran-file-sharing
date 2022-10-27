@@ -32,15 +32,7 @@ function ShareModal({ showShare, setShareShow, selectId, setSelectId }) {
     };
     const handleDone = () => {
         setShareShow(false);
-        setSelectId('');
-        // AxiosAuth.post(`${ConfigApi.FILE_TRASH.replace(':fileSl', selectId)}`).then((response) => {
-        //     if (response.data.error === 0) {
-        //         setReloadId(Math.random);
-        //         setShareShow(false);
-        //         setSelectId(null);
-        //         NotificationPopup(response, dispatch);
-        //     }
-        // });
+        setSelectId(null);
     };
     const handleFileGlobalView = (e) => {
         setGStatus(e.target.value);
@@ -153,7 +145,7 @@ function ShareModal({ showShare, setShareShow, selectId, setSelectId }) {
                         <div className="share-modal-access">
                             <h6>People with access</h6>
                             {file?.shareListAr?.map((sList) => (
-                                <div className="share-modal-access-list">
+                                <div className="share-modal-access-list" key={sList?.shareSl}>
                                     <img src={circleImg} alt="" />
                                     <p>
                                         <b>{sList?.userName}</b>

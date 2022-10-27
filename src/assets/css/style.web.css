@@ -29,15 +29,26 @@
   align-items: center;
   position: relative;
 }
-.my-drive-title > h4 {
-  font-size: 20px;
-  margin-bottom: 0;
-  width: 150px;
+.my-drive-title-breadcrumb {
+  width: 75%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
+
 .my-drive-title-option {
-  width: 94%;
+  width: 25%;
   display: flex;
   justify-content: right;
+}
+.my-drive-title-breadcrumb > a {
+  margin-right: 7px;
+  opacity: 0.8;
+}
+.my-drive-title-breadcrumb > a:last-child {
+  opacity: 1;
+  pointer-events: none;
 }
 .my-drive-title-option button {
   border: unset;
@@ -301,6 +312,13 @@
 }
 .drive-menu-box ul li:hover {
   background-color: #ae00b91c;
+}
+.drive-menu-box ul li > a > img {
+  width: 20px;
+}
+.drive-menu-box ul li > a > span {
+  margin-left: 10px;
+  font-size: 15px;
 }
 .share-modal-input {
   display: flex;
