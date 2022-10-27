@@ -33,7 +33,18 @@ function DriveDetailSideBar({ reloadId, setReloadId, selectId, setSelectId }) {
                             url={`https://file.sourav.xyz${file?.file_url}`}
                         />
                     ) : (
-                        <img src={folderImg} alt="" />
+                        <svg
+                            width="150"
+                            height="150"
+                            viewBox="0 0 20 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M2.5 14H17.5C18.8789 14 20 13.1031 20 12V4C20 2.89688 18.8789 2 17.5 2H11.6602C10.9961 2 10.3594 1.79063 9.89062 1.41563L8.85547 0.584375C8.38672 0.209375 7.75 0 7.08594 0H2.5C1.12109 0 0 0.896875 0 2V12C0 13.1031 1.12109 14 2.5 14Z"
+                                fill="red"
+                            />
+                        </svg>
                     )}
                 </div>
                 <div className="my-drive-detail-properties">

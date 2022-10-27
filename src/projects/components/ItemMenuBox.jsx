@@ -55,6 +55,19 @@ function ItemMenuBox({
                             <img src={IconShare} alt="Share With" /> <span>Share With</span>
                         </Link>
                     </li>
+                    <li className="color-change">
+                        <Link>
+                            <img src={IconShare} alt="Share With" /> <span>Change Color</span>
+                        </Link>
+                        <div className="color-change-box">
+                            <button type="button" style={{ background: '#7A7A7A' }} />
+                            <button type="button" style={{ background: '#F50303' }} />
+                            <button type="button" style={{ background: '#FFF600' }} />
+                            <button type="button" style={{ background: '#FFF600' }} />
+                            <button type="button" style={{ background: '#AE00B9' }} />
+                            <button type="button" style={{ background: '#F50303' }} />
+                        </div>
+                    </li>
                     <li>
                         <Link to="/user/logout/">
                             <img src={IconDownload} alt="Download" /> <span>Download</span>

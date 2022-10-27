@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import folderImg from '../../../../assets/images/folder-icon.svg';
 
 function FolderGridView({ files, selectId, setSelectId }) {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ function FolderGridView({ files, selectId, setSelectId }) {
                     }`}
                     key={folAr?.sl}
                 >
-                    <img src={folderImg} alt="Floder Img" />
+                    <FontAwesomeIcon color="#7A7A7A" icon={faFolder} />
                     <span>{folAr?.title}</span>
                 </div>
             ))}
