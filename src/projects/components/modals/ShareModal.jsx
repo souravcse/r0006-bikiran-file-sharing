@@ -7,7 +7,7 @@ import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 import NotificationPopup from '../../utils/NotificationPopup';
 
-function ShareModal({ showShare, setShareShow, selectId, setSelectId }) {
+function ShareModal({ fileAr, showShare, setShareShow, selectId, setSelectId }) {
     const dispatch = useDispatch();
     const [file, setFile] = useState(null);
     const [shareEmail, setShareEmail] = useState(null);
@@ -81,12 +81,12 @@ function ShareModal({ showShare, setShareShow, selectId, setSelectId }) {
         });
     };
     useEffect(() => {
-        AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
-            setFile(response.data);
-            setGStatus(response.data?.global_perm);
-            setAccessType(response.data?.is_restricted);
-        });
-    }, [selectId]);
+        if (fileAr) {
+            setFile(fileAr);
+            setGStatus(fileAr?.global_perm);
+            setAccessType(fileAr?.is_restricted);
+        }
+    }, [fileAr, selectId]);
 
     return (
         <Modal size="md" show={showShare} onHide={() => setShareShow(false)} centered>

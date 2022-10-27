@@ -32,7 +32,7 @@ const list = [
     {
         id: 'trash',
         title: 'Trash',
-        path: '/user/trash/',
+        path: '/user/drive/trash/',
         icon: Trash,
     },
 ];

@@ -97,6 +97,7 @@ function UsersDriveFolderPage({
             {selectId !== null ? (
                 <DriveDetailSideBar
                     reloadId={reloadId}
+                    setReloadId={setReloadId}
                     selectId={selectId}
                     setSelectId={setSelectId}
                 />

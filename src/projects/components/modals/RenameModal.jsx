@@ -8,7 +8,7 @@ import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 import NotificationPopup from '../../utils/NotificationPopup';
 
-function RenameModal({ showRename, setShowRename, setReloadId, selectId, setShowMenu }) {
+function RenameModal({ fileAr, showRename, setShowRename, setReloadId, selectId, setShowMenu }) {
     const dispatch = useDispatch();
 
     const [folderName, setFolderName] = useState('Untitled folder');
@@ -31,10 +31,10 @@ function RenameModal({ showRename, setShowRename, setReloadId, selectId, setShow
         });
     };
     useEffect(() => {
-        AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
-            setFolderName(response.data?.title);
-        });
-    }, [selectId]);
+        if (fileAr) {
+            setFolderName(fileAr?.title);
+        }
+    }, [fileAr]);
 
     return (
         <Modal size="sm" show={showRename} onHide={() => setShowRename(false)} centered>

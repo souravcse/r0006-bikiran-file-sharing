@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DragIcon from '../../../../assets/images/DragIcon.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
-import MyDriveTitle from '../../../components/MyDriveTitle';
+import MyDriveTitleRestore from '../../../components/MyDriveTitleRestore';
 import AxiosAuth from '../../../utils/AxiosAuth';
 import DriveDetailSideBar from '../section/DriveDetailSideBar';
 import FileGridView from '../section/FileGridView';
@@ -9,20 +9,25 @@ import FileListView from '../section/FileListView';
 import FolderGridView from '../section/FolderGridView';
 import FolderListView from '../section/FolderListView';
 
-function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId, setSelectId }) {
+function UsersDriveTrashPage({
+    reloadId,
+    setReloadId,
+    disStyle,
+    setDisStyle,
+    selectId,
+    setSelectId,
+}) {
     const [files, setFiles] = useState([]);
+    console.log('ok');
     useEffect(() => {
-        AxiosAuth.get(`${ConfigApi.GET_FILE}`).then((response) => {
+        AxiosAuth.get(`${ConfigApi.GET_TRASH_FILE}`).then((response) => {
             setFiles(response.data.fileList_ar);
         });
     }, [reloadId]);
 
-    if (!disStyle) {
-        return null;
-    }
     return (
         <>
-            <MyDriveTitle
+            <MyDriveTitleRestore
                 disStyle={disStyle}
                 setDisStyle={setDisStyle}
                 selectId={selectId}
@@ -93,4 +98,4 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
     );
 }
 
-export default UsersDrivePage;
+export default UsersDriveTrashPage;

@@ -6,6 +6,7 @@ import RegisterPage from './app/system/pages/RegisterPage';
 import UserAuthHandler from './app/user/models/UserAuthHandler';
 import UsersDriveFolderPage from './app/user/pages/UsersDriveFolderPage';
 import UsersDrivePage from './app/user/pages/UsersDrivePage';
+import UsersDriveTrashPage from './app/user/pages/UsersDriveTrashPage';
 import NotificationPopUpCommon from './components/NotificationPopUpCommon';
 import AppInitDispatch from './dispatches/AppInitDispatch';
 import InitInfo from './utils/InitInfo';
@@ -58,6 +59,19 @@ export default function RouteHandler() {
                             path="drive/folder/:folderSl/"
                             element={
                                 <UsersDriveFolderPage
+                                    reloadId={reloadId}
+                                    setReloadId={setReloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
+                        <Route
+                            path="drive/trash/"
+                            element={
+                                <UsersDriveTrashPage
                                     reloadId={reloadId}
                                     setReloadId={setReloadId}
                                     disStyle={disStyle}

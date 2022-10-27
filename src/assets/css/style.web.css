@@ -233,6 +233,7 @@
 .my-drive-detail-properties-access > ul {
   padding-left: 5px;
   margin-bottom: 20px;
+  position: relative;
 }
 .my-drive-detail-properties-access > ul > li {
   list-style: none;
@@ -240,6 +241,26 @@
   margin-right: 10px;
   padding-right: 10px;
   border-right: 1px solid #e7e7ec;
+  cursor: pointer;
+}
+.my-drive-detail-properties-access > ul > li > .share-user-name {
+  display: none;
+  position: absolute;
+  top: -25px;
+  font-size: 12px;
+}
+.my-drive-detail-properties-access > ul > li > .circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  background: #ad00b98f;
+}
+.my-drive-detail-properties-access > ul > li:hover > .share-user-name {
+  display: block;
 }
 .my-drive-detail-properties-access > ul > li:last-child {
   border-right: unset;

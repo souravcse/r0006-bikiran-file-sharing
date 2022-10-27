@@ -29,13 +29,22 @@ function FolderCreateModal({ show, setFCreateShow, setReloadId }) {
             }
         });
     };
-
+    const onKeyDownHandler = (e) => {
+        if (e.keyCode === 13) {
+            handleCreateFolder();
+        }
+    };
     return (
         <Modal size="sm" show={show} onHide={() => setFCreateShow(false)} centered>
             <Modal.Body>
                 <h5>New Folder</h5>
                 <div className="folder-create-input">
-                    <input type="text" value={folderName} onChange={handleFolder} />
+                    <input
+                        type="text"
+                        value={folderName}
+                        onChange={handleFolder}
+                        onKeyDown={onKeyDownHandler}
+                    />
                 </div>
                 <div className="folder-create-button">
                     <button type="button" onClick={() => setFCreateShow(false)}>
