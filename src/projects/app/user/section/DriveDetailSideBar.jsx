@@ -52,7 +52,7 @@ function DriveDetailSideBar({ reloadId, setReloadId, selectId, setSelectId }) {
                         <h6>Who has access</h6>
                         <ul>
                             {file?.shareListAr?.map((sList) => (
-                                <li>
+                                <li key={sList?.shareSl}>
                                     <div className="circle">{sList?.userName?.substring(0, 1)}</div>
                                     <div className="share-user-name">{sList?.userName}</div>
                                 </li>

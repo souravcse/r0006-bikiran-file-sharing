@@ -9,7 +9,6 @@ function FolderGridView({ files, selectId, setSelectId }) {
     const handleListFolder = (e) => {
         navigate(`/user/drive/folder/${e}/`);
     };
-    console.log(files);
     return (
         <>
             {files?.folder?.length > 0 ? <div className="my-drive-sub-title">Folder</div> : null}
