@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable no-unused-vars */
-import React from 'react';
+
+import React, { useState } from 'react';
 import FilesIcons from '../../../../configs/FilesIcons';
+import PreviewModal from '../../../components/modals/PreviewModal';
 import FilePreview from '../../../utils/FilePreview';
 
-function FileGridView({ files, selectId, setSelectId }) {
+function FileGridView({ files, selectId, setSelectId, setReloadId }) {
+    const [previewShow, setPreviewShow] = useState(false);
+
     return (
         <>
             {files?.file?.length > 0 ? <div className="my-drive-sub-title">Files</div> : null}
@@ -15,6 +18,7 @@ function FileGridView({ files, selectId, setSelectId }) {
                     }`}
                     onClick={() => setSelectId(fileAr?.sl)}
                     key={fileAr?.sl}
+                    onDoubleClick={() => setPreviewShow(true)}
                 >
                     <div className="my-drive-list-file-view">
                         <FilePreview
@@ -28,6 +32,16 @@ function FileGridView({ files, selectId, setSelectId }) {
                     </div>
                 </div>
             ))}
+            {previewShow ? (
+                <PreviewModal
+                    files={files?.file}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                    show={previewShow}
+                    setShow={setPreviewShow}
+                    setReloadId={setReloadId}
+                />
+            ) : null}
         </>
     );
 }

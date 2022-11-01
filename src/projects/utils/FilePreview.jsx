@@ -13,7 +13,7 @@ function FilePreview({ type, url }) {
         console.log(aaa);
         return <>{`${aaa}`}</>;
     }
-    if (type.search('image') === 0) {
+    if (type?.search('image') === 0) {
         return (
             <img style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={url} alt="" />
         );

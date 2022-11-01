@@ -42,6 +42,7 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
                                 files={files}
                                 selectId={selectId}
                                 setSelectId={setSelectId}
+                                setReloadId={setReloadId}
                             />
                         </>
                     ) : null}
@@ -66,6 +67,7 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
                                         files={files}
                                         selectId={selectId}
                                         setSelectId={setSelectId}
+                                        setReloadId={setReloadId}
                                     />
                                 </tbody>
                             </table>

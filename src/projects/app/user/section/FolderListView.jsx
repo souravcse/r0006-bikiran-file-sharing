@@ -1,6 +1,7 @@
+import { faFolder, faLock } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import folderImg from '../../../../assets/images/folder-icon.svg';
 
 function FolderListView({ files, selectId, setSelectId }) {
     const navigate = useNavigate();
@@ -17,7 +18,22 @@ function FolderListView({ files, selectId, setSelectId }) {
                     className={selectId === fileAr?.sl ? 'my-drive-list-selected' : ''}
                 >
                     <td>
-                        <img style={{ height: 15 }} src={folderImg} alt="Folder Img" />
+                        {fileAr?.is_lock === 0 ? (
+                            <FontAwesomeIcon
+                                size="xl"
+                                color={fileAr?.folder_color}
+                                icon={faFolder}
+                                style={{ marginRight: 21, marginLeft: 12 }}
+                            />
+                        ) : (
+                            <FontAwesomeIcon
+                                size="xl"
+                                color={fileAr?.folder_color}
+                                icon={faLock}
+                                style={{ marginRight: 21, marginLeft: 12 }}
+                            />
+                        )}
+
                         {fileAr?.title}
                     </td>
                     <td>Own</td>

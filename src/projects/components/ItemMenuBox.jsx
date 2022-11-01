@@ -5,6 +5,8 @@ import IconColor from '../../assets/images/color-palette.svg';
 import IconDownload from '../../assets/images/Download.svg';
 import IconMove from '../../assets/images/FileMove.svg';
 import IconOpen from '../../assets/images/FolderOpen.svg';
+import IconHide from '../../assets/images/hide-icon.svg';
+import IconLock from '../../assets/images/lock-icon.svg';
 import IconRename from '../../assets/images/Rename.svg';
 import IconArrow from '../../assets/images/RightArrow.svg';
 import IconShare from '../../assets/images/user.svg';
@@ -47,6 +49,8 @@ function ItemMenuBox({
     setShowMove,
     setShareShow,
     setReloadId,
+    setShowHide,
+    setShowLock,
 }) {
     const [folderColor, setFolderColor] = useState(null);
 
@@ -66,7 +70,7 @@ function ItemMenuBox({
             setFolderColor(fileAr?.folder_color);
         }
     }, [fileAr]);
-    console.log(folderColor);
+
     return (
         <>
             <div
@@ -105,23 +109,43 @@ function ItemMenuBox({
                             <img src={IconShare} alt="Share With" /> <span>Share With</span>
                         </Link>
                     </li>
-                    <li className="color-change">
-                        <Link>
-                            <img src={IconColor} alt="Color Chnage" /> <span>Change Color</span>
+                    {fileAr?.type === 'folder' ? (
+                        <>
+                            <li className="color-change">
+                                <Link>
+                                    <img src={IconColor} alt="Color Chnage" />{' '}
+                                    <span>Change Color</span>
+                                </Link>
+                                <div className="color-change-box">
+                                    {colorList.map((colo) => (
+                                        <button
+                                            type="button"
+                                            style={{
+                                                background: colo?.color,
+                                                border:
+                                                    folderColor === colo?.color
+                                                        ? '3px solid'
+                                                        : 'unset',
+                                            }}
+                                            key={colo?.id}
+                                            onClick={() => handleFolderColor(colo?.color)}
+                                        />
+                                    ))}
+                                </div>
+                            </li>
+
+                            <li>
+                                <Link onClick={() => setShowLock(true)}>
+                                    <img src={IconLock} alt="Share With" /> <span>Lock Folder</span>
+                                </Link>
+                            </li>
+                        </>
+                    ) : null}
+                    <li>
+                        <Link onClick={() => setShowHide(true)}>
+                            <img src={IconHide} alt="Share With" />
+                            <span>Hide Folder</span>
                         </Link>
-                        <div className="color-change-box">
-                            {colorList.map((colo) => (
-                                <button
-                                    type="button"
-                                    style={{
-                                        background: colo?.color,
-                                        border: folderColor === colo?.color ? '3px solid' : 'unset',
-                                    }}
-                                    key={colo?.id}
-                                    onClick={() => handleFolderColor(colo?.color)}
-                                />
-                            ))}
-                        </div>
                     </li>
                     <li>
                         <Link to="/user/logout/">

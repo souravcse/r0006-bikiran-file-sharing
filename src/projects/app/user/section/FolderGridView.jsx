@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import { faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faFolder, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,12 @@ function FolderGridView({ files, selectId, setSelectId }) {
                     }`}
                     key={folAr?.sl}
                 >
-                    <FontAwesomeIcon color={folAr?.folder_color} icon={faFolder} />
+                    {folAr?.is_lock === 0 ? (
+                        <FontAwesomeIcon color={folAr?.folder_color} icon={faFolder} />
+                    ) : (
+                        <FontAwesomeIcon color={folAr?.folder_color} icon={faLock} />
+                    )}
+
                     <span>{folAr?.title}</span>
                 </div>
             ))}

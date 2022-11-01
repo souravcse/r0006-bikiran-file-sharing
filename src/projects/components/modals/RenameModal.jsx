@@ -8,7 +8,14 @@ import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 import NotificationPopup from '../../utils/NotificationPopup';
 
-function RenameModal({ fileAr, showRename, setShowRename, setReloadId, selectId, setShowMenu }) {
+function RenameModal({
+    fileAr,
+    showRename,
+    setShowRename,
+    setReloadId,
+    selectId,
+    setShowMenu = '',
+}) {
     const dispatch = useDispatch();
 
     const [folderName, setFolderName] = useState('Untitled folder');

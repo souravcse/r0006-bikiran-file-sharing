@@ -55,6 +55,7 @@ function UsersDriveFolderPage({
                                 files={files}
                                 selectId={selectId}
                                 setSelectId={setSelectId}
+                                setReloadId={setReloadId}
                             />
                         </>
                     ) : null}
@@ -79,6 +80,7 @@ function UsersDriveFolderPage({
                                         files={files}
                                         selectId={selectId}
                                         setSelectId={setSelectId}
+                                        setReloadId={setReloadId}
                                     />
                                 </tbody>
                             </table>

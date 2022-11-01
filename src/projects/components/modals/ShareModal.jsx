@@ -81,13 +81,13 @@ function ShareModal({ fileAr, showShare, setShareShow, selectId, setSelectId }) 
         });
     };
     useEffect(() => {
-        if (fileAr) {
-            setFile(fileAr);
-            setGStatus(fileAr?.global_perm);
-            setAccessType(fileAr?.is_restricted);
-        }
+        AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
+            setFile(response.data);
+            setGStatus(response.data?.global_perm);
+            setAccessType(response.data?.is_restricted);
+        });
     }, [fileAr, selectId]);
-
+    console.log(fileAr?.shareListAr?.length);
     return (
         <Modal size="md" show={showShare} onHide={() => setShareShow(false)} centered>
             <Modal.Body>

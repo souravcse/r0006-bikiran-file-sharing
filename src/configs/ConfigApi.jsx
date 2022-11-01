@@ -21,8 +21,11 @@ const ConfigApi = {
     FILE_SHARE_SEND_NON_ACC: `${api}/manage/file/:fileSl/share-send/non-acc`,
 
     RENAME_FILE: `${api}/manage/file/:fileSl/rename`,
+    HIDE_FILE: `${api}/manage/file/:fileSl/hide`,
+    LOCK_FOLDER: `${api}/manage/file/:fileSl/lock`,
     MOVE_FILE: `${api}/manage/file/:fileSl/move`,
     COLOR_CHANGE: `${api}/manage/file/:folderSl/color-change`,
+    FILE_DOWNLOAD: `${api}/manage/file/:fileSl/download`,
 };
 
 export default ConfigApi;

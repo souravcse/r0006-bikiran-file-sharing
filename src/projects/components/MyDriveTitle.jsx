@@ -9,6 +9,8 @@ import ConfigApi from '../../configs/ConfigApi';
 import AxiosAuth from '../utils/AxiosAuth';
 import DriveBreadcrumb from './DriveBreadcrumb';
 import ItemMenuBox from './ItemMenuBox';
+import HideModal from './modals/HideModal';
+import LockModal from './modals/LockModal';
 import MoveModal from './modals/MoveModal';
 import MoveToTrashModal from './modals/MoveToTrashModal';
 import RenameModal from './modals/RenameModal';
@@ -22,6 +24,8 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
     const [showMenu, setShowMenu] = useState(false);
     const [showRename, setShowRename] = useState(false);
     const [showMove, setShowMove] = useState(false);
+    const [showHide, setShowHide] = useState(false);
+    const [showLock, setShowLock] = useState(false);
 
     const handleStyle = (e) => {
         setDisStyle(e);
@@ -75,6 +79,8 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                         setShowMove={setShowMove}
                         setShareShow={setShareShow}
                         setReloadId={setReloadId}
+                        setShowHide={setShowHide}
+                        setShowLock={setShowLock}
                     />
                 ) : null}
             </div>
@@ -115,6 +121,28 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                 <MoveModal
                     showMove={showMove}
                     setShowMove={setShowMove}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setShowMenu={setShowMenu}
+                    setSelectId={setSelectId}
+                />
+            ) : null}
+
+            {showHide ? (
+                <HideModal
+                    showHide={showHide}
+                    setShowHide={setShowHide}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setShowMenu={setShowMenu}
+                    setSelectId={setSelectId}
+                />
+            ) : null}
+
+            {showLock ? (
+                <LockModal
+                    showLock={showLock}
+                    setShowLock={setShowLock}
                     setReloadId={setReloadId}
                     selectId={selectId}
                     setShowMenu={setShowMenu}
