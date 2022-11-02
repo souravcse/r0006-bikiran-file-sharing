@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import RigntArrow from '../../assets/images/RightArrow.svg';
 import ConfigApi from '../../configs/ConfigApi';
 import AxiosAuth from '../utils/AxiosAuth';
@@ -9,6 +9,8 @@ function DriveBreadcrumb() {
     const params = useParams();
     const parentSl = params?.folderSl;
     const [breadcrumbAr, setBreadcrumbAr] = useState({});
+    const location = useLocation();
+    const q = new URLSearchParams(location.search).get('enCode');
 
     useEffect(() => {
         if (parentSl > 0) {
@@ -24,7 +26,7 @@ function DriveBreadcrumb() {
         <div className="my-drive-title-breadcrumb">
             <Link to="/user/drive/"> My Drive</Link>
             {Object.values(breadcrumbAr)?.map((brCrumb) => (
-                <Link to={`/user/drive/folder/${brCrumb?.sl}/`} key={brCrumb?.sl}>
+                <Link to={`/user/drive/folder/${brCrumb?.sl}/?enCode=${q}`} key={brCrumb?.sl}>
                     <img src={RigntArrow} alt="" /> {brCrumb?.title}
                 </Link>
             ))}

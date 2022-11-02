@@ -1,12 +1,18 @@
 import { faFolder, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+
+import { useLocation, useNavigate } from 'react-router-dom';
+import LockOpenModal from '../../../components/modals/LockOpenModal';
 
 function FolderListView({ files, selectId, setSelectId }) {
+    const [openLock, setOpenLock] = useState(false);
+    const location = useLocation();
+    const q = new URLSearchParams(location.search).get('enCode');
+
     const navigate = useNavigate();
     const handleListFolder = (e) => {
-        navigate(`/user/drive/folder/${e}/`);
+        navigate(`/user/drive/folder/${e}/?enCode=${q}`);
     };
     return (
         <>
@@ -14,7 +20,11 @@ function FolderListView({ files, selectId, setSelectId }) {
                 <tr
                     key={fileAr?.sl}
                     onClick={() => setSelectId(fileAr?.sl)}
-                    onDoubleClick={() => handleListFolder(fileAr?.sl)}
+                    onDoubleClick={
+                        fileAr?.is_lock !== 0
+                            ? () => setOpenLock(true)
+                            : () => handleListFolder(fileAr?.sl)
+                    }
                     className={selectId === fileAr?.sl ? 'my-drive-list-selected' : ''}
                 >
                     <td>
@@ -41,6 +51,9 @@ function FolderListView({ files, selectId, setSelectId }) {
                     <td>--</td>
                 </tr>
             ))}
+            {openLock ? (
+                <LockOpenModal openLock={openLock} setOpenLock={setOpenLock} selectId={selectId} />
+            ) : null}
         </>
     );
 }

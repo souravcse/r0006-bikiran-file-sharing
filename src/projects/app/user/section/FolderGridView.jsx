@@ -2,12 +2,15 @@
 import { faFolder, faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function FolderGridView({ files, selectId, setSelectId }) {
     const navigate = useNavigate();
+    const location = useLocation();
+    const q = new URLSearchParams(location.search).get('enCode');
+
     const handleListFolder = (e) => {
-        navigate(`/user/drive/folder/${e}/`);
+        navigate(`/user/drive/folder/${e}/?enCode=${q}`);
     };
     return (
         <>

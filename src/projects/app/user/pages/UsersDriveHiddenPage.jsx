@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import DragIcon from '../../../../assets/images/DragIcon.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
-import LockOpenModal from '../../../components/modals/LockOpenModal';
+import HideOpenModal from '../../../components/modals/HideOpenModal';
 import MyDriveTitle from '../../../components/MyDriveTitle';
 import AxiosAuth from '../../../utils/AxiosAuth';
 import DriveDetailSideBar from '../section/DriveDetailSideBar';
@@ -11,7 +11,7 @@ import FileListView from '../section/FileListView';
 import FolderGridView from '../section/FolderGridView';
 import FolderListView from '../section/FolderListView';
 
-function UsersDriveFolderPage({
+function UsersDriveHiddenPage({
     reloadId,
     setReloadId,
     disStyle,
@@ -21,30 +21,22 @@ function UsersDriveFolderPage({
 }) {
     const [files, setFiles] = useState([]);
     const [openLock, setOpenLock] = useState(false);
-
-    const location = useLocation();
-    const q = new URLSearchParams(location.search).get('enCode');
+    const [isPageShow, setIsPageShow] = useState(false);
 
     const params = useParams();
     const parentSl = params?.folderSl ? params?.folderSl : 0;
 
     useEffect(() => {
         setSelectId(null);
-        AxiosAuth.get(`${ConfigApi.CHECK_LOCK_DETAIL?.replace(':folderSl', parentSl)}`, {
-            params: { lockPass: q },
-        }).then((response) => {
-            if (response.data.error === 0) {
-                AxiosAuth.get(`${ConfigApi.GET_FILE_DETAIL?.replace(':folderSl', parentSl)}`).then(
-                    (response2) => {
-                        setFiles(response2.data.fileList_ar);
-                    }
-                );
-            } else {
-                setOpenLock(true);
-                setFiles([]);
-            }
-        });
-    }, [parentSl, q, setSelectId]);
+        if (isPageShow) {
+            AxiosAuth.get(`${ConfigApi.GET_HIDE_FILE_DETAIL?.replace(':folderSl', parentSl)}`).then(
+                (response2) => {
+                    setFiles(response2.data.fileList_ar);
+                    setIsPageShow(true);
+                }
+            );
+        }
+    }, [isPageShow, parentSl, setSelectId]);
 
     return (
         <>
@@ -117,11 +109,16 @@ function UsersDriveFolderPage({
                     setSelectId={setSelectId}
                 />
             ) : null}
-            {openLock ? (
-                <LockOpenModal openLock={openLock} setOpenLock={setOpenLock} selectId={parentSl} />
+            {openLock && !isPageShow ? (
+                <HideOpenModal
+                    openLock={openLock}
+                    setOpenLock={setOpenLock}
+                    selectId={parentSl}
+                    setIsPageShow={setIsPageShow}
+                />
             ) : null}
         </>
     );
 }
 
-export default UsersDriveFolderPage;
+export default UsersDriveHiddenPage;

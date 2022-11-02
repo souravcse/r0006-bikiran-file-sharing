@@ -11,6 +11,8 @@ import '../assets/css/style.search-bar.css';
 import '../assets/css/style.search-bar.responsive.css';
 import '../assets/css/style.system.responsive.css';
 import '../assets/css/style.web.css';
+import '../assets/css/top-box.css';
+
 import RouteHandler from './RouteHandler';
 import store from './store';
 

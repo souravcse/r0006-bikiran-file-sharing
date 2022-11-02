@@ -5,6 +5,7 @@ import LoginPage from './app/system/pages/LoginPage';
 import RegisterPage from './app/system/pages/RegisterPage';
 import UserAuthHandler from './app/user/models/UserAuthHandler';
 import UsersDriveFolderPage from './app/user/pages/UsersDriveFolderPage';
+import UsersDriveHiddenPage from './app/user/pages/UsersDriveHiddenPage';
 import UsersDrivePage from './app/user/pages/UsersDrivePage';
 import UsersDriveTrashPage from './app/user/pages/UsersDriveTrashPage';
 import NotificationPopUpCommon from './components/NotificationPopUpCommon';
@@ -72,6 +73,19 @@ export default function RouteHandler() {
                             path="drive/trash/"
                             element={
                                 <UsersDriveTrashPage
+                                    reloadId={reloadId}
+                                    setReloadId={setReloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
+                        <Route
+                            path="drive/hide-list/"
+                            element={
+                                <UsersDriveHiddenPage
                                     reloadId={reloadId}
                                     setReloadId={setReloadId}
                                     disStyle={disStyle}

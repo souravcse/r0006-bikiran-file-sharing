@@ -294,6 +294,7 @@
 .my-drive-detail-properties-info > table > tr:last-child {
   border-bottom: unset;
 }
+
 .color-change {
   position: relative;
 }
