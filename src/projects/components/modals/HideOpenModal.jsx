@@ -6,7 +6,7 @@ import { Modal } from 'react-bootstrap';
 import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 
-function HideOpenModal({ showOpenHide, setShowOpenHide }) {
+function HideOpenModal({ openHide, setOpenHide, setIsPageShow }) {
     const [lockPass, setLockPass] = useState('');
     const handleLockPass = (e) => {
         setLockPass(e.target.value);
@@ -16,24 +16,25 @@ function HideOpenModal({ showOpenHide, setShowOpenHide }) {
             lockPass,
         }).then((response) => {
             if (response.data.error === 0) {
-                setShowOpenHide(false);
+                setIsPageShow(true);
+                setOpenHide(false);
             }
         });
     };
     return (
-        <Modal size="sm" show={showOpenHide} onHide={() => setShowOpenHide(false)} centered>
+        <Modal size="sm" show={openHide} onHide={() => setOpenHide(false)} centered>
             <Modal.Body>
-                <h5>Is Hide ?</h5>
+                <h5>Is UnHide ?</h5>
                 <div className="folder-create-input">
                     <input
                         type="password"
                         value={lockPass}
                         onChange={handleLockPass}
-                        placeholder="Type Lock Password"
+                        placeholder="Type User Password"
                     />
                 </div>
                 <div className="folder-create-button">
-                    <button type="button" onClick={() => setShowOpenHide(false)}>
+                    <button type="button" onClick={() => setOpenHide(false)}>
                         No
                     </button>
                     <button type="button" onClick={() => handleHideFolder(1)}>

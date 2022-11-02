@@ -20,11 +20,11 @@ function UsersDriveHiddenPage({
     setSelectId,
 }) {
     const [files, setFiles] = useState([]);
-    const [openLock, setOpenLock] = useState(false);
+    const [openHide, setOpenHide] = useState(true);
     const [isPageShow, setIsPageShow] = useState(false);
 
     const params = useParams();
-    const parentSl = params?.folderSl ? params?.folderSl : 0;
+    const parentSl = params?.folderSl ? params?.folderSl : 'folderSl';
 
     useEffect(() => {
         setSelectId(null);
@@ -109,10 +109,10 @@ function UsersDriveHiddenPage({
                     setSelectId={setSelectId}
                 />
             ) : null}
-            {openLock && !isPageShow ? (
+            {openHide ? (
                 <HideOpenModal
-                    openLock={openLock}
-                    setOpenLock={setOpenLock}
+                    openHide={openHide}
+                    setOpenHide={setOpenHide}
                     selectId={parentSl}
                     setIsPageShow={setIsPageShow}
                 />

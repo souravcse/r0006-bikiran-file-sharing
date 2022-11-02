@@ -141,12 +141,19 @@ function ItemMenuBox({
                             </li>
                         </>
                     ) : null}
-                    <li>
+                    {fileAr?.is_hide === 1 ? (
+                        <li>
+                            <Link onClick={() => setShowHide(true)}>
+                                <img src={IconHide} alt="Share With" />
+                                <span>Un Hide Folder</span>
+                            </Link>
+                        </li>
+                    ) : (
                         <Link onClick={() => setShowHide(true)}>
                             <img src={IconHide} alt="Share With" />
                             <span>Hide Folder</span>
                         </Link>
-                    </li>
+                    )}
                     <li>
                         <Link to="/user/logout/">
                             <img src={IconDownload} alt="Download" /> <span>Download</span>
