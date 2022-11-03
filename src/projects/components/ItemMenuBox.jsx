@@ -76,12 +76,12 @@ function ItemMenuBox({
             <div
                 tabIndex={0}
                 role="button"
-                className={['top-box-foreground', showMenu ? 'show' : ''].join(' ')}
+                className={['top-box-foreground2', showMenu ? 'show' : ''].join(' ')}
                 onClick={() => {
                     setShowMenu(false);
                 }}
             />
-            <div className={['drive-menu-box top-box', showMenu ? 'show' : ''].join(' ')}>
+            <div className={['drive-menu-box top-box2', showMenu ? 'show' : ''].join(' ')}>
                 <ul>
                     <li>
                         <Link to={`/user/drive/folder/${selectId}/`}>
@@ -149,10 +149,12 @@ function ItemMenuBox({
                             </Link>
                         </li>
                     ) : (
-                        <Link onClick={() => setShowHide(true)}>
-                            <img src={IconHide} alt="Share With" />
-                            <span>Hide Folder</span>
-                        </Link>
+                        <li>
+                            <Link onClick={() => setShowHide(true)}>
+                                <img src={IconHide} alt="Share With" />
+                                <span>Hide Folder</span>
+                            </Link>
+                        </li>
                     )}
                     <li>
                         <Link to="/user/logout/">

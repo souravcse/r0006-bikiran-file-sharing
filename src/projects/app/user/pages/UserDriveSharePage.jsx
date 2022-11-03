@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import DragIcon from '../../../../assets/images/DragIcon.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
-import LockOpenModal from '../../../components/modals/LockOpenModal';
 import MyDriveTitle from '../../../components/MyDriveTitle';
 import AxiosAuth from '../../../utils/AxiosAuth';
 import DriveDetailSideBar from '../section/DriveDetailSideBar';
@@ -11,7 +9,7 @@ import FileListView from '../section/FileListView';
 import FolderGridView from '../section/FolderGridView';
 import FolderListView from '../section/FolderListView';
 
-function UsersDriveFolderPage({
+function UserDriveSharePage({
     reloadId,
     setReloadId,
     disStyle,
@@ -20,31 +18,11 @@ function UsersDriveFolderPage({
     setSelectId,
 }) {
     const [files, setFiles] = useState([]);
-    const [openLock, setOpenLock] = useState(false);
-
-    const location = useLocation();
-    const q = new URLSearchParams(location.search).get('enCode');
-
-    const params = useParams();
-    const parentSl = params?.folderSl ? params?.folderSl : 0;
-
     useEffect(() => {
-        setSelectId(null);
-        AxiosAuth.get(`${ConfigApi.CHECK_LOCK_DETAIL?.replace(':folderSl', parentSl)}`, {
-            params: { lockPass: q },
-        }).then((response) => {
-            if (response.data.error === 0) {
-                AxiosAuth.get(`${ConfigApi.GET_FILE_DETAIL?.replace(':folderSl', parentSl)}`).then(
-                    (response2) => {
-                        setFiles(response2.data.fileList_ar);
-                    }
-                );
-            } else {
-                setOpenLock(true);
-                setFiles([]);
-            }
+        AxiosAuth.get(`${ConfigApi.GET_SHARE_FILE}`).then((response) => {
+            setFiles(response.data.fileList_ar);
         });
-    }, [parentSl, q, setSelectId, reloadId]);
+    }, []);
 
     return (
         <>
@@ -63,7 +41,6 @@ function UsersDriveFolderPage({
                                 files={files}
                                 selectId={selectId}
                                 setSelectId={setSelectId}
-                                setReloadId={setReloadId}
                             />
                             <FileGridView
                                 files={files}
@@ -89,7 +66,6 @@ function UsersDriveFolderPage({
                                         files={files}
                                         selectId={selectId}
                                         setSelectId={setSelectId}
-                                        setReloadId={setReloadId}
                                     />
                                     <FileListView
                                         files={files}
@@ -119,11 +95,8 @@ function UsersDriveFolderPage({
                     setSelectId={setSelectId}
                 />
             ) : null}
-            {openLock ? (
-                <LockOpenModal openLock={openLock} setOpenLock={setOpenLock} selectId={parentSl} />
-            ) : null}
         </>
     );
 }
 
-export default UsersDriveFolderPage;
+export default UserDriveSharePage;

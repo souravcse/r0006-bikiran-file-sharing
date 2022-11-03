@@ -11,6 +11,7 @@ const ConfigApi = {
     FILE_UPLOAD: `${api}/manage/file/:folderSl/create`,
     FOLDER_UPLOAD: `${api}/manage/file/:folderSl/folder/create`,
     GET_FILE: `${api}/manage/file`,
+    GET_SHARE_FILE: `${api}/manage/file/share`,
     GET_TRASH_FILE: `${api}/manage/file/trash`,
     GET_FILE_DETAIL: `${api}/manage/file/:folderSl/folder`,
     GET_HIDE_FILE_DETAIL: `${api}/manage/file/:folderSl/hide-folder`,
@@ -30,6 +31,8 @@ const ConfigApi = {
     MOVE_FILE: `${api}/manage/file/:fileSl/move`,
     COLOR_CHANGE: `${api}/manage/file/:folderSl/color-change`,
     FILE_DOWNLOAD: `${api}/manage/file/:fileSl/download`,
+    FILE_RESTORE: `${api}/manage/file/:fileSl/restore`,
+    FILE_REMOVE_FOREVER: `${api}/manage/file/remove/forever`,
 };
 
 export default ConfigApi;

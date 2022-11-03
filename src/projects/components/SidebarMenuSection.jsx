@@ -26,7 +26,7 @@ const list = [
     {
         id: 'shareDrive',
         title: 'Shared Drive',
-        path: '/user/share/drive/',
+        path: '/user/drive/share/',
         icon: ShareDriveIcon,
     },
     {

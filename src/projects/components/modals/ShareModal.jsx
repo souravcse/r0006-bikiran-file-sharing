@@ -80,14 +80,34 @@ function ShareModal({ fileAr, showShare, setShareShow, selectId, setSelectId }) 
             }
         });
     };
+
+    const onClick = async () => {
+        if ('clipboard' in navigator) {
+            await navigator.clipboard.writeText(
+                `https://file.sourav.xyz/manage/file/${selectId}/share`
+            );
+            NotificationPopup(
+                {
+                    data: {
+                        error: 0,
+                        message: 'Link Copied',
+                    },
+                },
+                dispatch
+            );
+        } else {
+            document.execCommand('copy', true, 'Text which you want to copy');
+        }
+    };
     useEffect(() => {
         AxiosAuth.get(`${ConfigApi.GET_DETAIL.replace(':fileSl', selectId)}`).then((response) => {
             setFile(response.data);
             setGStatus(response.data?.global_perm);
             setAccessType(response.data?.is_restricted);
+            console.log(response);
         });
     }, [fileAr, selectId]);
-    console.log(fileAr?.shareListAr?.length);
+
     return (
         <Modal size="md" show={showShare} onHide={() => setShareShow(false)} centered>
             <Modal.Body>
@@ -185,9 +205,10 @@ function ShareModal({ fileAr, showShare, setShareShow, selectId, setSelectId }) 
                 ) : null}
 
                 <div className="folder-create-button">
-                    <button type="button" onClick={() => setShareShow(false)}>
-                        Cancel
+                    <button type="button" onClick={onClick}>
+                        Cony Link
                     </button>
+
                     {shareEmail !== null ? (
                         <button type="button" onClick={handleShareSend}>
                             Send
@@ -197,6 +218,9 @@ function ShareModal({ fileAr, showShare, setShareShow, selectId, setSelectId }) 
                             Done
                         </button>
                     )}
+                    <button type="button" onClick={() => setShareShow(false)}>
+                        Cancel
+                    </button>
                 </div>
             </Modal.Body>
         </Modal>

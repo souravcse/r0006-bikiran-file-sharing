@@ -5,10 +5,14 @@ import ListIcon from '../../assets/images/ListIcon.svg';
 import RestoreIcon from '../../assets/images/Restore.svg';
 import DeleteIcon from '../../assets/images/trash.svg';
 import DriveBreadcrumb from './DriveBreadcrumb';
+import EmptyTrashModal from './modals/EmptyTrashModal';
 import MoveToTrashModal from './modals/MoveToTrashModal';
+import RestoreModal from './modals/RestoreModal';
 
 function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, setSelectId }) {
     const [showTrash, setTrashShow] = useState(false);
+    const [showRestore, setShowRestore] = useState(false);
+    const [showEmTrash, setEmTrashShow] = useState(false);
 
     const handleStyle = (e) => {
         setDisStyle(e);
@@ -22,7 +26,7 @@ function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, set
                 <div className="my-drive-title-option">
                     {selectId ? (
                         <div className="my-drive-select-option">
-                            <button type="button">
+                            <button type="button" onClick={() => setShowRestore(true)}>
                                 <img src={RestoreIcon} alt="Restore Icon" />
                             </button>
                             <button type="button" onClick={() => setTrashShow(true)}>
@@ -39,6 +43,13 @@ function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, set
                             <img src={ListIcon} alt="List Icon" />
                         </button>
                     )}
+                    <button
+                        type="button"
+                        className="empty-trash"
+                        onClick={() => setEmTrashShow(true)}
+                    >
+                        Empty Trash
+                    </button>
                 </div>
             </div>
 
@@ -46,6 +57,25 @@ function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, set
                 <MoveToTrashModal
                     showTrash={showTrash}
                     setTrashShow={setTrashShow}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                />
+            ) : null}
+            {showRestore ? (
+                <RestoreModal
+                    showRestore={showRestore}
+                    setShowRestore={setShowRestore}
+                    setReloadId={setReloadId}
+                    selectId={selectId}
+                    setSelectId={setSelectId}
+                />
+            ) : null}
+
+            {showEmTrash ? (
+                <EmptyTrashModal
+                    showEmTrash={showEmTrash}
+                    setEmTrashShow={setEmTrashShow}
                     setReloadId={setReloadId}
                     selectId={selectId}
                     setSelectId={setSelectId}
