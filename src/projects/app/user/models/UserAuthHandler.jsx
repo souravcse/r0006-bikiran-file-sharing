@@ -1,8 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-import React, { useState } from 'react';
-
-import { Outlet } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import CrossIcon from '../../../../assets/images/cross-white.svg';
 import CompIcon from '../../../../assets/images/icon-tic.svg';
 import FixedHeaderControl from '../../../components/FixedHeaderControl';
@@ -64,6 +63,12 @@ function UserAuthHandler({ setReloadId }) {
     const [uploadBox, setUploadBox] = useState(false);
     const [uploadComplete, setUploadComplete] = useState([]);
     const [uploadTitle, setUploadTitle] = useState([]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (!localStorage.getItem('Secure-Access')) {
+            navigate('/');
+        }
+    });
     return (
         <div className={['h-100 user-h-area', 'browser browser-4xl'].join(' ')}>
             <FixedHeaderControl>

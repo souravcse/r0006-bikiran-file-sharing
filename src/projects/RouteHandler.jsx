@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoginPage from './app/system/pages/LoginPage';
+import LogoutPage from './app/system/pages/LogoutPage';
 import RegisterPage from './app/system/pages/RegisterPage';
 import UserAuthHandler from './app/user/models/UserAuthHandler';
 import UserDriveSharePage from './app/user/pages/UserDriveSharePage';
@@ -42,6 +43,7 @@ export default function RouteHandler() {
                 <NotificationPopUpCommon />
                 <Routes>
                     <Route path="/" element={<LoginPage />} />
+                    <Route path="/logout" element={<LogoutPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/user/*" element={<UserAuthHandler setReloadId={setReloadId} />}>
                         <Route

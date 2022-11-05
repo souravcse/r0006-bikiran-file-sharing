@@ -6,6 +6,7 @@ const ConfigApi = {
     // Auth
     LOGIN: `${api}/login`,
     REGISTER: `${api}/register`,
+    LOGOUT: `${api}/logout`,
     // Folder Create
     CREATE_FOLDER: `${api}/manage/file/folder/create`,
     FILE_UPLOAD: `${api}/manage/file/:folderSl/create`,

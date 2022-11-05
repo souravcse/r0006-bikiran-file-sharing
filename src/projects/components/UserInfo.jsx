@@ -1,4 +1,10 @@
-import { faHome, faQuestionCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+/* eslint-disable prettier/prettier */
+import {
+    faEyeSlash,
+    faHome,
+    faQuestionCircle,
+    faSignOutAlt, faUserCircle
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -8,7 +14,7 @@ function UserInfo({ userInformation }) {
         <div className="profile-sidebar">
             <div className="profile-userpic">
                 <div className="profile-user-circle">
-                    <FontAwesomeIcon icon={faHome} />
+                    <FontAwesomeIcon size='xl' icon={faUserCircle} />
                 </div>
             </div>
             <div className="profile-usertitle">
@@ -39,15 +45,15 @@ function UserInfo({ userInformation }) {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/user/logout/">
-                            <FontAwesomeIcon icon={faSignOutAlt} />
-                            <span>Logout</span>
+                        <Link to="/user/drive/hide-list/">
+                            <FontAwesomeIcon icon={faEyeSlash} />
+                            <span>Hidden List</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="/user/drive/hide-list/">
+                        <Link to="/logout/">
                             <FontAwesomeIcon icon={faSignOutAlt} />
-                            <span>Hidden List</span>
+                            <span>Logout</span>
                         </Link>
                     </li>
                 </ul>

@@ -32,6 +32,7 @@ function UserDriveSharePage({
                 selectId={selectId}
                 setSelectId={setSelectId}
                 setReloadId={setReloadId}
+                isShare={1}
             />
             {files?.folder?.length > 0 || files?.file?.length > 0 ? (
                 <div className="my-drive" style={{ width: selectId !== null ? '70%' : '100%' }}>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import Logo from '../../../../assets/images/Logo.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
@@ -30,6 +31,12 @@ function LoginPage() {
                 console.log(err);
             });
     };
+    useEffect(() => {
+        if (localStorage.getItem('Secure-Access')) {
+            navigate('/user/drive/');
+        }
+    });
+
     return (
         <div className={['h-100 user-h-area', 'browser browser-4xl'].join(' ')}>
             <div className="body-section">

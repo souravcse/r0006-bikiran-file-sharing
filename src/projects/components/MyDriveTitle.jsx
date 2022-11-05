@@ -16,7 +16,7 @@ import MoveToTrashModal from './modals/MoveToTrashModal';
 import RenameModal from './modals/RenameModal';
 import ShareModal from './modals/ShareModal';
 
-function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectId }) {
+function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectId, isShare = 0 }) {
     const [file, setFile] = useState(null);
 
     const [showTrash, setTrashShow] = useState(false);
@@ -81,6 +81,7 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
                         setReloadId={setReloadId}
                         setShowHide={setShowHide}
                         setShowLock={setShowLock}
+                        isShare={isShare}
                     />
                 ) : null}
             </div>

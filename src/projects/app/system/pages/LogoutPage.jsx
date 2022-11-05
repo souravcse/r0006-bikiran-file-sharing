@@ -1,12 +1,18 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import ConfigApi from '../../../../configs/ConfigApi';
+import AxiosAuth from '../../../utils/AxiosAuth';
 
 function LogoutPage() {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        localStorage.clear();
-        history.push('/login/');
+        AxiosAuth.post(`${ConfigApi.LOGOUT}`).then((response) => {
+            if (response.data.error === 0) {
+                localStorage.clear();
+                navigate('/');
+            }
+        });
     });
 
     return <div />;

@@ -51,6 +51,7 @@ function ItemMenuBox({
     setReloadId,
     setShowHide,
     setShowLock,
+    isShare,
 }) {
     const [folderColor, setFolderColor] = useState(null);
 
@@ -94,13 +95,19 @@ function ItemMenuBox({
                         </Link>
                     </li>
                     <li>
-                        <Link onClick={() => setShowRename(true)}>
+                        <Link
+                            onClick={() => setShowRename(true)}
+                            className={isShare > 0 ? 'link-disabled' : null}
+                        >
                             <img src={IconRename} alt="Rename" /> <span>Rename</span>
                         </Link>
                     </li>
 
                     <li>
-                        <Link onClick={() => setShowMove(true)}>
+                        <Link
+                            onClick={() => setShowMove(true)}
+                            className={isShare > 0 ? 'link-disabled' : null}
+                        >
                             <img src={IconMove} alt="Move to" /> <span>Move to</span>
                         </Link>
                     </li>

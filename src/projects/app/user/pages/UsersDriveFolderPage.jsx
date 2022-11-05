@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import DragIcon from '../../../../assets/images/DragIcon.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
 import LockOpenModal from '../../../components/modals/LockOpenModal';
 import MyDriveTitle from '../../../components/MyDriveTitle';
 import AxiosAuth from '../../../utils/AxiosAuth';
+import DragDropFile from '../../../utils/DragDropFile';
 import DriveDetailSideBar from '../section/DriveDetailSideBar';
 import FileGridView from '../section/FileGridView';
 import FileListView from '../section/FileListView';
@@ -56,7 +56,7 @@ function UsersDriveFolderPage({
                 setReloadId={setReloadId}
             />
             {files?.folder?.length > 0 || files?.file?.length > 0 ? (
-                <div className="my-drive" style={{ width: selectId !== null ? '70%' : '100%' }}>
+                <div className="my-drive" style={{ width: selectId !== null ? '81%' : '100%' }}>
                     {disStyle === '1' ? (
                         <>
                             <FolderGridView
@@ -105,9 +105,10 @@ function UsersDriveFolderPage({
             ) : (
                 <div className="my-drive">
                     <div className="my-drive-empty">
-                        <img src={DragIcon} alt="Drag Icon" />
+                        {/* <img src={DragIcon} alt="Drag Icon" />
                         <h6>Drop Files here</h6>
-                        <small>or use Add New button</small>
+                        <small>or use Add New button</small> */}
+                        <DragDropFile />
                     </div>
                 </div>
             )}

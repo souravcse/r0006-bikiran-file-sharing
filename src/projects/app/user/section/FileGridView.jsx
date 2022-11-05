@@ -20,7 +20,11 @@ function FileGridView({ files, selectId, setSelectId, setReloadId }) {
                     key={fileAr?.sl}
                     onDoubleClick={() => setPreviewShow(true)}
                 >
-                    <div className="my-drive-list-file-view">
+                    <div
+                        className="my-drive-list-file-view"
+                        onClick={() => setSelectId(fileAr?.sl)}
+                        onDoubleClick={() => setPreviewShow(true)}
+                    >
                         <FilePreview
                             type={fileAr?.file_type}
                             url={`https://file.sourav.xyz${fileAr?.file_url}`}
