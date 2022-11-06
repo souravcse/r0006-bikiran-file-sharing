@@ -1,12 +1,13 @@
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-loop-func */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import ConfigApi from '../../configs/ConfigApi';
+import AxiosAuth from './AxiosAuth';
 
-function handleFile(files) {
-    console.log(files.length);
-}
-
-function DragDropFile() {
+function DragDropFile({ setReloadId, setUploadComplete, setUploadTitle, setUploadBox, parentSl }) {
     const [dragActive, setDragActive] = React.useState(false);
     // ref
     const inputRef = React.useRef(null);
@@ -21,27 +22,66 @@ function DragDropFile() {
             setDragActive(false);
         }
     };
+    const handleDrop = async (e) => {
+        console.log(e);
+        e.preventDefault();
+        e.stopPropagation();
+        setDragActive(false);
+        setUploadBox(true);
 
-    // triggers when file is dropped
-    const handleDrop = async ({ target }) => {
-        console.log(target);
+        const { files } = e.dataTransfer;
+        for (let xx = 0; xx < files.length; xx += 1) {
+            setUploadTitle((oldItems) => [...oldItems, files[xx]?.name]);
+        }
+        for (let x = 0; x < files.length; x += 1) {
+            const formData = new FormData();
+            formData.append('upload_file', files[x]);
+            await AxiosAuth.post(ConfigApi.FOLDER_UPLOAD.replace(':folderSl', parentSl), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    webkitRelativePath: files[x]?.webkitRelativePath,
+                },
+                parentSl,
+            })
+                .then((response) => {
+                    if (response.data.error === 0) {
+                        setUploadComplete((oldItemsx) => [...oldItemsx, files[x]?.name]);
+                        setReloadId(Math.random);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
-    // const handleDrop = (e) => {
-    //     console.log(e);
-    //     e.preventDefault();
-    //     e.stopPropagation();
-    //     setDragActive(false);
-    //     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-    //         handleFile(e.dataTransfer.files);
-    //     }
-    // };
-
     // triggers when file is selected with click
-    const handleChange = (e) => {
-        e.preventDefault();
-        if (e.target.files && e.target.files[0]) {
-            handleFile(e.target.files);
+    const handleChange = async (target) => {
+        console.log(target);
+        setUploadBox(true);
+        const { files } = target?.target;
+        for (let xx = 0; xx < files?.length; xx += 1) {
+            setUploadTitle((oldItems) => [...oldItems, files[xx]?.name]);
+        }
+        for (let x = 0; x < files?.length; x += 1) {
+            const formData = new FormData();
+            formData.append('upload_file', files[x]);
+
+            await AxiosAuth.post(ConfigApi.FILE_UPLOAD.replace(':folderSl', parentSl), formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                parentSl,
+            })
+                .then((response) => {
+                    if (response.data.error === 0) {
+                        setUploadComplete((oldItemsx) => [...oldItemsx, files[x]?.name]);
+                        setReloadId(Math.random);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         }
     };
 
@@ -55,9 +95,12 @@ function DragDropFile() {
             <input
                 ref={inputRef}
                 type="file"
+                name="file"
                 id="input-file-upload"
                 multiple
                 onChange={handleChange}
+                // webkitdirectory="true"
+                // mozdirectory="true"
             />
             <label
                 id="label-file-upload"

@@ -58,6 +58,7 @@ function AddBox({
         setShow(false);
     };
     const handleOnFileChange = async ({ target }) => {
+        console.log(target);
         setUploadBox(true);
         setShow(false);
         const { files } = target;
@@ -67,6 +68,7 @@ function AddBox({
         for (let x = 0; x < files.length; x += 1) {
             const formData = new FormData();
             formData.append('upload_file', files[x]);
+
             await AxiosAuth.post(ConfigApi.FILE_UPLOAD.replace(':folderSl', parentSl), formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -85,6 +87,7 @@ function AddBox({
         }
     };
     const handleOnFolderChange = async ({ target }) => {
+        console.log(target);
         setUploadBox(true);
         setShow(false);
         const { files } = target;

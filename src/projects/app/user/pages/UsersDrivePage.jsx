@@ -3,6 +3,7 @@ import ConfigApi from '../../../../configs/ConfigApi';
 import MyDriveTitle from '../../../components/MyDriveTitle';
 import AxiosAuth from '../../../utils/AxiosAuth';
 import DragDropFile from '../../../utils/DragDropFile';
+import UploadingBox from '../../../utils/UploadingBox';
 import DriveDetailSideBar from '../section/DriveDetailSideBar';
 import FileGridView from '../section/FileGridView';
 import FileListView from '../section/FileListView';
@@ -11,6 +12,10 @@ import FolderListView from '../section/FolderListView';
 
 function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId, setSelectId }) {
     const [files, setFiles] = useState([]);
+    const [uploadBox, setUploadBox] = useState(false);
+    const [uploadComplete, setUploadComplete] = useState([]);
+    const [uploadTitle, setUploadTitle] = useState([]);
+
     useEffect(() => {
         AxiosAuth.get(`${ConfigApi.GET_FILE}`).then((response) => {
             setFiles(response.data.fileList_ar);
@@ -20,6 +25,7 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
     if (!disStyle) {
         return null;
     }
+
     return (
         <>
             <MyDriveTitle
@@ -80,7 +86,12 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
                         {/* <img src={DragIcon} alt="Drag Icon" />
                         <h6>Drop Files here</h6>
                         <small>or use Add New button</small> */}
-                        <DragDropFile setReloadId={setReloadId} />
+                        <DragDropFile
+                            setReloadId={setReloadId}
+                            setUploadComplete={setUploadComplete}
+                            setUploadTitle={setUploadTitle}
+                            setUploadBox={setUploadBox}
+                        />
                     </div>
                 </div>
             )}
@@ -90,6 +101,14 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
                     setReloadId={setReloadId}
                     selectId={selectId}
                     setSelectId={setSelectId}
+                />
+            ) : null}
+            {uploadBox ? (
+                <UploadingBox
+                    uploadBox={uploadBox}
+                    setUploadBox={setUploadBox}
+                    uploadComplete={uploadComplete}
+                    uploadTitle={uploadTitle}
                 />
             ) : null}
         </>

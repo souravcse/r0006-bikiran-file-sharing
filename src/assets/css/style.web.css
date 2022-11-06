@@ -789,8 +789,6 @@
 }
 
 #form-file-upload {
-  height: 16rem;
-  width: 28rem;
   max-width: 100%;
   text-align: center;
   position: relative;
@@ -805,11 +803,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-width: 2px;
-  border-radius: 1rem;
-  border-style: dashed;
-  border-color: #cbd5e1;
-  background-color: #f8fafc;
+  background-color: transparent;
 }
 
 #label-file-upload.drag-active {

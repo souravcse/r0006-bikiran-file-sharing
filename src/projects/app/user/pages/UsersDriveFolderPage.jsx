@@ -5,6 +5,7 @@ import LockOpenModal from '../../../components/modals/LockOpenModal';
 import MyDriveTitle from '../../../components/MyDriveTitle';
 import AxiosAuth from '../../../utils/AxiosAuth';
 import DragDropFile from '../../../utils/DragDropFile';
+import UploadingBox from '../../../utils/UploadingBox';
 import DriveDetailSideBar from '../section/DriveDetailSideBar';
 import FileGridView from '../section/FileGridView';
 import FileListView from '../section/FileListView';
@@ -21,6 +22,9 @@ function UsersDriveFolderPage({
 }) {
     const [files, setFiles] = useState([]);
     const [openLock, setOpenLock] = useState(false);
+    const [uploadBox, setUploadBox] = useState(false);
+    const [uploadComplete, setUploadComplete] = useState([]);
+    const [uploadTitle, setUploadTitle] = useState([]);
 
     const location = useLocation();
     const q = new URLSearchParams(location.search).get('enCode');
@@ -108,7 +112,13 @@ function UsersDriveFolderPage({
                         {/* <img src={DragIcon} alt="Drag Icon" />
                         <h6>Drop Files here</h6>
                         <small>or use Add New button</small> */}
-                        <DragDropFile />
+                        <DragDropFile
+                            setReloadId={setReloadId}
+                            setUploadComplete={setUploadComplete}
+                            setUploadTitle={setUploadTitle}
+                            setUploadBox={setUploadBox}
+                            parentSl={parentSl}
+                        />
                     </div>
                 </div>
             )}
@@ -118,6 +128,14 @@ function UsersDriveFolderPage({
                     setReloadId={setReloadId}
                     selectId={selectId}
                     setSelectId={setSelectId}
+                />
+            ) : null}
+            {uploadBox ? (
+                <UploadingBox
+                    uploadBox={uploadBox}
+                    setUploadBox={setUploadBox}
+                    uploadComplete={uploadComplete}
+                    uploadTitle={uploadTitle}
                 />
             ) : null}
             {openLock ? (
