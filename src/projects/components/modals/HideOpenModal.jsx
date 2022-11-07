@@ -30,7 +30,7 @@ function HideOpenModal({ openHide, setOpenHide, setIsPageShow }) {
                         type="password"
                         value={lockPass}
                         onChange={handleLockPass}
-                        placeholder="Type User Password"
+                        placeholder="Type Login Password"
                     />
                 </div>
                 <div className="folder-create-button">

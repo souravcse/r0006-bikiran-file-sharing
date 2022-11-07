@@ -16,7 +16,15 @@ import MoveToTrashModal from './modals/MoveToTrashModal';
 import RenameModal from './modals/RenameModal';
 import ShareModal from './modals/ShareModal';
 
-function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectId, isShare = 0 }) {
+function MyDriveTitle({
+    disStyle,
+    setDisStyle,
+    selectId,
+    setReloadId,
+    setSelectId,
+    isShare = 0,
+    title = 'My Drive',
+}) {
     const [file, setFile] = useState(null);
 
     const [showTrash, setTrashShow] = useState(false);
@@ -40,7 +48,7 @@ function MyDriveTitle({ disStyle, setDisStyle, selectId, setReloadId, setSelectI
     return (
         <>
             <div className="my-drive-title">
-                <DriveBreadcrumb />
+                <DriveBreadcrumb title={title} />
                 <div className="my-drive-title-option">
                     {selectId ? (
                         <div className="my-drive-select-option">

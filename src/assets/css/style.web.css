@@ -24,12 +24,15 @@
   margin-bottom: 15px;
 }
 .my-drive-title {
-  width: 100%;
+  width: calc(100% - 315px);
   border-bottom: 1px solid #e7e7ec;
   padding: 10px;
   display: flex;
   align-items: center;
-  position: relative;
+  position: fixed;
+  height: 65px;
+  background: #f9fbfc;
+  z-index: 99;
 }
 .my-drive-title-breadcrumb {
   width: 75%;
@@ -602,7 +605,7 @@
 .upload-box-modal {
   width: 360px;
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 20px;
   padding: 0 0 0 0;

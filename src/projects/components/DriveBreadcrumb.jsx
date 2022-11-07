@@ -5,7 +5,7 @@ import RigntArrow from '../../assets/images/RightArrow.svg';
 import ConfigApi from '../../configs/ConfigApi';
 import AxiosAuth from '../utils/AxiosAuth';
 
-function DriveBreadcrumb() {
+function DriveBreadcrumb({ title }) {
     const params = useParams();
     const parentSl = params?.folderSl;
     const [breadcrumbAr, setBreadcrumbAr] = useState({});
@@ -24,7 +24,7 @@ function DriveBreadcrumb() {
 
     return (
         <div className="my-drive-title-breadcrumb">
-            <Link to="/user/drive/"> My Drive</Link>
+            <Link to="/user/drive/"> {title}</Link>
             {Object.values(breadcrumbAr)?.map((brCrumb) => (
                 <Link to={`/user/drive/folder/${brCrumb?.sl}/?enCode=${q}`} key={brCrumb?.sl}>
                     <img src={RigntArrow} alt="" /> {brCrumb?.title}

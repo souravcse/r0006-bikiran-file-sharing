@@ -9,7 +9,14 @@ import EmptyTrashModal from './modals/EmptyTrashModal';
 import MoveToTrashModal from './modals/MoveToTrashModal';
 import RestoreModal from './modals/RestoreModal';
 
-function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, setSelectId }) {
+function MyDriveTitleRestore({
+    disStyle,
+    setDisStyle,
+    selectId,
+    setReloadId,
+    setSelectId,
+    isFile,
+}) {
     const [showTrash, setTrashShow] = useState(false);
     const [showRestore, setShowRestore] = useState(false);
     const [showEmTrash, setEmTrashShow] = useState(false);
@@ -22,7 +29,7 @@ function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, set
     return (
         <>
             <div className="my-drive-title">
-                <DriveBreadcrumb />
+                <DriveBreadcrumb title="Trash Drive" />
                 <div className="my-drive-title-option">
                     {selectId ? (
                         <div className="my-drive-select-option">
@@ -43,13 +50,15 @@ function MyDriveTitleRestore({ disStyle, setDisStyle, selectId, setReloadId, set
                             <img src={ListIcon} alt="List Icon" />
                         </button>
                     )}
-                    <button
-                        type="button"
-                        className="empty-trash"
-                        onClick={() => setEmTrashShow(true)}
-                    >
-                        Empty Trash
-                    </button>
+                    {isFile > 0 ? (
+                        <button
+                            type="button"
+                            className="empty-trash"
+                            onClick={() => setEmTrashShow(true)}
+                        >
+                            Empty Trash
+                        </button>
+                    ) : null}
                 </div>
             </div>
 

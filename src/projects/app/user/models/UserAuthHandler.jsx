@@ -33,10 +33,8 @@ function UserAuthHandler({ setReloadId }) {
                                 setReloadId={setReloadId}
                             />
                         </div>
-                        <div className="cell cell-content h-100">
-                            <div className="content-section">
-                                <Outlet />
-                            </div>
+                        <div className="cell cell-content h-100" style={{ position: 'relative' }}>
+                            <Outlet />
                         </div>
                     </div>
                 </div>
