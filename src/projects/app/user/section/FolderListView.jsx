@@ -12,7 +12,7 @@ function FolderListView({ files, selectId, setSelectId }) {
 
     const navigate = useNavigate();
     const handleListFolder = (e) => {
-        navigate(`/user/drive/folder/${e}/?enCode=${q}`);
+        navigate(`/user/drive/folder/${`${e}${selectId}`}/?enCode=${q}`);
     };
     return (
         <>
@@ -23,7 +23,7 @@ function FolderListView({ files, selectId, setSelectId }) {
                     onDoubleClick={
                         fileAr?.is_lock !== 0
                             ? () => setOpenLock(true)
-                            : () => handleListFolder(fileAr?.sl)
+                            : () => handleListFolder(fileAr?.keyId)
                     }
                     className={selectId === fileAr?.sl ? 'my-drive-list-selected' : ''}
                 >

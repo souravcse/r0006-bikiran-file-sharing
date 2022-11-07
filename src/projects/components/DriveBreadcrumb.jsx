@@ -7,7 +7,7 @@ import AxiosAuth from '../utils/AxiosAuth';
 
 function DriveBreadcrumb({ title }) {
     const params = useParams();
-    const parentSl = params?.folderSl;
+    const parentSl = params?.folderSl?.slice(params?.folderSl?.length - 8);
     const [breadcrumbAr, setBreadcrumbAr] = useState({});
     const location = useLocation();
     const q = new URLSearchParams(location.search).get('enCode');

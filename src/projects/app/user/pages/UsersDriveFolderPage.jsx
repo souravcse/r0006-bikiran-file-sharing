@@ -30,7 +30,7 @@ function UsersDriveFolderPage({
     const q = new URLSearchParams(location.search).get('enCode');
 
     const params = useParams();
-    const parentSl = params?.folderSl ? params?.folderSl : 0;
+    const parentSl = params?.folderSl ? params?.folderSl.slice(params?.folderSl.length - 8) : 0;
 
     useEffect(() => {
         setSelectId(null);

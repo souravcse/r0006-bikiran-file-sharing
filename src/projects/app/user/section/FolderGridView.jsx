@@ -18,7 +18,7 @@ function FolderGridView({ files, selectId, setSelectId }) {
             {files?.folder?.map((folAr) => (
                 <div
                     onClick={() => setSelectId(folAr?.sl)}
-                    onDoubleClick={() => handleListFolder(folAr?.sl)}
+                    onDoubleClick={() => handleListFolder(folAr?.keyId)}
                     className={`my-drive-list  ${selectId ? 'my-drive-list-2' : ''} ${
                         selectId === folAr?.sl ? 'my-drive-list-selected' : ''
                     }`}

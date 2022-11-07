@@ -24,7 +24,9 @@ function UsersDriveHiddenPage({
     const [isPageShow, setIsPageShow] = useState(false);
 
     const params = useParams();
-    const parentSl = params?.folderSl ? params?.folderSl : 'folderSl';
+    const parentSl = params?.folderSl
+        ? params?.folderSl.slice(params?.folderSl.length - 8)
+        : 'folderSl';
 
     useEffect(() => {
         setSelectId(null);
@@ -36,7 +38,7 @@ function UsersDriveHiddenPage({
                 }
             );
         }
-    }, [isPageShow, parentSl, setSelectId]);
+    }, [isPageShow, parentSl, setSelectId, reloadId]);
 
     return (
         <>

@@ -139,6 +139,7 @@ function MyDriveTitle({
 
             {showHide ? (
                 <HideModal
+                    fileAr={file}
                     showHide={showHide}
                     setShowHide={setShowHide}
                     setReloadId={setReloadId}

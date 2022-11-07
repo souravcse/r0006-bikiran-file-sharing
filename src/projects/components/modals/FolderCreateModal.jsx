@@ -12,7 +12,7 @@ import NotificationPopup from '../../utils/NotificationPopup';
 function FolderCreateModal({ show, setFCreateShow, setReloadId }) {
     const dispatch = useDispatch();
     const params = useParams();
-    const parentSl = params?.folderSl ? params?.folderSl : 0;
+    const parentSl = params?.folderSl ? params?.folderSl.slice(params?.folderSl.length - 8) : 0;
 
     const [folderName, setFolderName] = useState('Untitled folder');
     const handleFolder = (e) => {

@@ -24,17 +24,25 @@ function HideModal({ fileAr, showHide, setShowHide, setReloadId, selectId, setSh
             }
         });
     };
-    console.log(fileAr);
+
     return (
         <Modal size="sm" show={showHide} onHide={() => setShowHide(false)} centered>
             <Modal.Body>
                 <h5>Is Hide ?</h5>
-                <p>Do you want to Hidden this file</p>
+                {fileAr?.is_hide === 0 ? (
+                    <p>Do you want to Hidden this file</p>
+                ) : (
+                    <p>Do you want to Remove Form Hidden list</p>
+                )}
+
                 <div className="folder-create-button">
                     <button type="button" onClick={() => setShowHide(false)}>
                         No
                     </button>
-                    <button type="button" onClick={() => handleHideFolder(1)}>
+                    <button
+                        type="button"
+                        onClick={() => handleHideFolder(fileAr?.is_hide === 0 ? 1 : 0)}
+                    >
                         Yes
                     </button>
                 </div>
