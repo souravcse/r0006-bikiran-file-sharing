@@ -104,7 +104,6 @@ function ShareModal({ fileAr, showShare, setShareShow, selectId, setSelectId }) 
             setFile(response.data);
             setGStatus(response.data?.global_perm);
             setAccessType(response.data?.is_restricted);
-            console.log(response);
         });
     }, [fileAr, selectId]);
 

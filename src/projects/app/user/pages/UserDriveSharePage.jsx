@@ -19,10 +19,12 @@ function UserDriveSharePage({
 }) {
     const [files, setFiles] = useState([]);
     useEffect(() => {
+        setSelectId(null);
+
         AxiosAuth.get(`${ConfigApi.GET_SHARE_FILE}`).then((response) => {
             setFiles(response.data.fileList_ar);
         });
-    }, []);
+    }, [setSelectId]);
 
     return (
         <>

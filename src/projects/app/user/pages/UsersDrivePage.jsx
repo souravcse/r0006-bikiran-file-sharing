@@ -17,10 +17,12 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
     const [uploadTitle, setUploadTitle] = useState([]);
 
     useEffect(() => {
+        setSelectId(null);
+
         AxiosAuth.get(`${ConfigApi.GET_FILE}`).then((response) => {
             setFiles(response.data.fileList_ar);
         });
-    }, [reloadId]);
+    }, [reloadId, setSelectId]);
 
     if (!disStyle) {
         return null;
@@ -82,19 +84,17 @@ function UsersDrivePage({ reloadId, setReloadId, disStyle, setDisStyle, selectId
                         ) : null}
                     </div>
                 ) : (
-                    <div className="content-section">
-                        <div className="my-drive">
-                            <div className="my-drive-empty">
-                                {/* <img src={DragIcon} alt="Drag Icon" />
+                    <div className="my-drive">
+                        <div className="my-drive-empty">
+                            {/* <img src={DragIcon} alt="Drag Icon" />
                         <h6>Drop Files here</h6>
                         <small>or use Add New button</small> */}
-                                <DragDropFile
-                                    setReloadId={setReloadId}
-                                    setUploadComplete={setUploadComplete}
-                                    setUploadTitle={setUploadTitle}
-                                    setUploadBox={setUploadBox}
-                                />
-                            </div>
+                            <DragDropFile
+                                setReloadId={setReloadId}
+                                setUploadComplete={setUploadComplete}
+                                setUploadTitle={setUploadTitle}
+                                setUploadBox={setUploadBox}
+                            />
                         </div>
                     </div>
                 )}

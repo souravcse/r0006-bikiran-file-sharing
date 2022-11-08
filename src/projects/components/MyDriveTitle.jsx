@@ -55,9 +55,15 @@ function MyDriveTitle({
                             <button type="button" onClick={() => setShareShow(true)}>
                                 <img src={AdduserIcon} alt="Share Icon" />
                             </button>
-                            <button type="button" onClick={() => setTrashShow(true)}>
-                                <img style={{ height: 18 }} src={DeleteIcon} alt="Delete Icon" />
-                            </button>
+                            {file?.permission === 'owner' ? (
+                                <button type="button" onClick={() => setTrashShow(true)}>
+                                    <img
+                                        style={{ height: 18 }}
+                                        src={DeleteIcon}
+                                        alt="Delete Icon"
+                                    />
+                                </button>
+                            ) : null}
                             <button type="button" onClick={() => setShowMenu(true)}>
                                 <img src={DotbarIcon} alt="Dot Bar Icon" />
                             </button>

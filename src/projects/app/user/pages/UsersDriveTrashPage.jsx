@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import DragIcon from '../../../../assets/images/DragIcon.svg';
 import ConfigApi from '../../../../configs/ConfigApi';
 import MyDriveTitleRestore from '../../../components/MyDriveTitleRestore';
 import AxiosAuth from '../../../utils/AxiosAuth';
@@ -20,10 +19,11 @@ function UsersDriveTrashPage({
     const [files, setFiles] = useState([]);
 
     useEffect(() => {
+        setSelectId(null);
         AxiosAuth.get(`${ConfigApi.GET_TRASH_FILE}`).then((response) => {
             setFiles(response.data.fileList_ar);
         });
-    }, [reloadId]);
+    }, [reloadId, setSelectId]);
 
     return (
         <>
@@ -82,9 +82,7 @@ function UsersDriveTrashPage({
                 ) : (
                     <div className="my-drive">
                         <div className="my-drive-empty">
-                            <img src={DragIcon} alt="Drag Icon" />
-                            <h6>Drop Files here</h6>
-                            <small>or use Add New button</small>
+                            <h6>No Trash Files</h6>
                         </div>
                     </div>
                 )}
