@@ -5,6 +5,7 @@
 import { createRef, useEffect, useRef, useState } from 'react';
 
 import { Link, useParams } from 'react-router-dom';
+import Dev from '../../assets/images/Dev.svg';
 import FileAdd from '../../assets/images/fileAdd.svg';
 import FolderAdd from '../../assets/images/folderAdd.svg';
 import FolderUp from '../../assets/images/folderUp.svg';
@@ -34,6 +35,12 @@ const list = [
         title: 'Trash',
         path: '/user/drive/trash/',
         icon: Trash,
+    },
+    {
+        id: 'dev',
+        title: 'Developer',
+        path: '/user/drive/dev/',
+        icon: Dev,
     },
 ];
 

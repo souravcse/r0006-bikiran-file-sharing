@@ -5,6 +5,9 @@ import LoginPage from './app/system/pages/LoginPage';
 import LogoutPage from './app/system/pages/LogoutPage';
 import RegisterPage from './app/system/pages/RegisterPage';
 import UserAuthHandler from './app/user/models/UserAuthHandler';
+import UserDriveDevApiPrivatePage from './app/user/pages/UserDriveDevApiPrivatePage';
+import UserDriveDevApiPublicPage from './app/user/pages/UserDriveDevApiPublicPage';
+import UserDriveDeveloperPage from './app/user/pages/UserDriveDeveloperPage';
 import UserDriveSharePage from './app/user/pages/UserDriveSharePage';
 import UsersDriveFolderPage from './app/user/pages/UsersDriveFolderPage';
 import UsersDriveHiddenPage from './app/user/pages/UsersDriveHiddenPage';
@@ -102,6 +105,45 @@ export default function RouteHandler() {
                             path="drive/share/"
                             element={
                                 <UserDriveSharePage
+                                    reloadId={reloadId}
+                                    setReloadId={setReloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
+                        <Route
+                            path="drive/dev/"
+                            element={
+                                <UserDriveDeveloperPage
+                                    reloadId={reloadId}
+                                    setReloadId={setReloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
+                        <Route
+                            path="drive/dev/api-public/"
+                            element={
+                                <UserDriveDevApiPublicPage
+                                    reloadId={reloadId}
+                                    setReloadId={setReloadId}
+                                    disStyle={disStyle}
+                                    setDisStyle={setDisStyle}
+                                    selectId={selectId}
+                                    setSelectId={setSelectId}
+                                />
+                            }
+                        />
+                        <Route
+                            path="drive/dev/api-private/"
+                            element={
+                                <UserDriveDevApiPrivatePage
                                     reloadId={reloadId}
                                     setReloadId={setReloadId}
                                     disStyle={disStyle}

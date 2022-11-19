@@ -6,7 +6,6 @@ import RestoreIcon from '../../assets/images/Restore.svg';
 import DeleteIcon from '../../assets/images/trash.svg';
 import DriveBreadcrumb from './DriveBreadcrumb';
 import EmptyTrashModal from './modals/EmptyTrashModal';
-import MoveToTrashModal from './modals/MoveToTrashModal';
 import RestoreModal from './modals/RestoreModal';
 
 function MyDriveTitleRestore({
@@ -17,7 +16,6 @@ function MyDriveTitleRestore({
     setSelectId,
     isFile,
 }) {
-    const [showTrash, setTrashShow] = useState(false);
     const [showRestore, setShowRestore] = useState(false);
     const [showEmTrash, setEmTrashShow] = useState(false);
 
@@ -36,7 +34,7 @@ function MyDriveTitleRestore({
                             <button type="button" onClick={() => setShowRestore(true)}>
                                 <img src={RestoreIcon} alt="Restore Icon" />
                             </button>
-                            <button type="button" onClick={() => setTrashShow(true)}>
+                            <button type="button" onClick={() => setEmTrashShow(true)}>
                                 <img style={{ height: 18 }} src={DeleteIcon} alt="Delete Icon" />
                             </button>
                         </div>
@@ -62,15 +60,6 @@ function MyDriveTitleRestore({
                 </div>
             </div>
 
-            {showTrash ? (
-                <MoveToTrashModal
-                    showTrash={showTrash}
-                    setTrashShow={setTrashShow}
-                    setReloadId={setReloadId}
-                    selectId={selectId}
-                    setSelectId={setSelectId}
-                />
-            ) : null}
             {showRestore ? (
                 <RestoreModal
                     showRestore={showRestore}

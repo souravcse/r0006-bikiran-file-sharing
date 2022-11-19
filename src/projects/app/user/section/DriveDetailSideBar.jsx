@@ -59,6 +59,10 @@ function DriveDetailSideBar({ reloadId, setReloadId, selectId, setSelectId }) {
                 </div>
                 <div className="my-drive-detail-properties">
                     <div className="my-drive-detail-properties-access">
+                        <button type="button">Copy Link</button>
+                        <button type="button">Download</button>
+                    </div>
+                    <div className="my-drive-detail-properties-access">
                         <h6>Who has access</h6>
                         <ul>
                             {file?.shareListAr?.map((sList) => (

@@ -5,10 +5,10 @@ import ConfigApi from '../../../configs/ConfigApi';
 import AxiosAuth from '../../utils/AxiosAuth';
 import NotificationPopup from '../../utils/NotificationPopup';
 
-function EmptyTrashModal({ showEmTrash, setEmTrashShow, setReloadId, setSelectId }) {
+function EmptyTrashModal({ showEmTrash, setEmTrashShow, setReloadId, selectId, setSelectId }) {
     const dispatch = useDispatch();
     const handleTrash = () => {
-        AxiosAuth.post(`${ConfigApi.FILE_REMOVE_FOREVER}`).then((response) => {
+        AxiosAuth.post(`${ConfigApi.FILE_REMOVE_FOREVER}`, { selectId }).then((response) => {
             if (response.data.error === 0) {
                 setReloadId(Math.random);
                 setEmTrashShow(false);

@@ -66,6 +66,21 @@ function ItemMenuBox({
             }
         });
     };
+    const handleFileDownload = () => {
+        AxiosAuth.get(`${ConfigApi.FILE_DOWNLOAD.replace(':fileSl', selectId)}`).then(
+            (response) => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                link.setAttribute('download', `sdsds.png`);
+                document.body.appendChild(link);
+                link.click();
+
+                // Clean up and remove the link
+                link.parentNode.removeChild(link);
+            }
+        );
+    };
     useEffect(() => {
         if (fileAr) {
             setFolderColor(fileAr?.folder_color);
@@ -164,7 +179,7 @@ function ItemMenuBox({
                         </li>
                     )}
                     <li>
-                        <Link to="/user/logout/">
+                        <Link onClick={() => handleFileDownload()}>
                             <img src={IconDownload} alt="Download" /> <span>Download</span>
                         </Link>
                     </li>

@@ -581,6 +581,9 @@ select.form-input {
 .pt-2 {
   padding-top: 10px;
 }
+.p-15 {
+  padding: 15px;
+}
 .box-center {
   position: absolute;
   left: 50%;

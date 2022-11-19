@@ -7,6 +7,7 @@ class AxiosAuth {
         axios.defaults.headers.common['Secure-Access'] = localStorage.getItem('Secure-Access');
         axios.defaults.headers.common['Init-Id'] = localStorage.getItem('init-id');
         // axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
+        // responseType: "blob" // important
     }
 
     get(url, headers) {

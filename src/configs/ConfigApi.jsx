@@ -34,6 +34,16 @@ const ConfigApi = {
     FILE_DOWNLOAD: `${api}/manage/file/:fileSl/download`,
     FILE_RESTORE: `${api}/manage/file/:fileSl/restore`,
     FILE_REMOVE_FOREVER: `${api}/manage/file/remove/forever`,
+
+    API_PRIVATE_CREATE: `${api}/manage/file/api-private/create`,
+    API_PRIVATE_LIST: `${api}/manage/file/api-private`,
+    API_PRIVATE_CODE: `${api}/manage/file/api-private/:apiSl/`,
+    API_PRIVATE_KEY_UPDATE: `${api}/manage/file/api-private/:apiSl/update`,
+
+    API_PUBLIC_CREATE: `${api}/manage/file/api-public/create`,
+    API_PUBLIC_LIST: `${api}/manage/file/api-public`,
+    API_PUBLIC_CODE: `${api}/manage/file/api-public/:apiSl/`,
+    API_PUBLIC_KEY_UPDATE: `${api}/manage/file/api-public/:apiSl/update`,
 };
 
 export default ConfigApi;

@@ -10,7 +10,7 @@ function FolderGridView({ files, selectId, setSelectId }) {
     const q = new URLSearchParams(location.search).get('enCode');
 
     const handleListFolder = (e) => {
-        navigate(`/user/drive/folder/${e}/?enCode=${q}`);
+        navigate(`/user/drive/folder/${e}${selectId}/?enCode=${q}`);
     };
     return (
         <>
