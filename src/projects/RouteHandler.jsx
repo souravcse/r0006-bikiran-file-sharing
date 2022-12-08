@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ErrorPage from './app/system/pages/ErrorPage';
 import LoginPage from './app/system/pages/LoginPage';
 import LogoutPage from './app/system/pages/LogoutPage';
 import RegisterPage from './app/system/pages/RegisterPage';
@@ -48,6 +49,8 @@ export default function RouteHandler() {
                     <Route path="/" element={<LoginPage />} />
                     <Route path="/logout" element={<LogoutPage />} />
                     <Route path="/register" element={<RegisterPage />} />
+
+                    <Route path="/error" element={<ErrorPage />} />
                     <Route path="/user/*" element={<UserAuthHandler setReloadId={setReloadId} />}>
                         <Route
                             path="drive/"

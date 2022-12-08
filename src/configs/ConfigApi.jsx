@@ -44,6 +44,7 @@ const ConfigApi = {
     API_PUBLIC_LIST: `${api}/manage/file/api-public`,
     API_PUBLIC_CODE: `${api}/manage/file/api-public/:apiSl/`,
     API_PUBLIC_KEY_UPDATE: `${api}/manage/file/api-public/:apiSl/update`,
+    TEST: `${api}/:sl/test`,
 };
 
 export default ConfigApi;
